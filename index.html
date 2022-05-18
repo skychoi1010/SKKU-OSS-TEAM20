@@ -1,21 +1,23 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with Rubic landing page.">
     <meta name="author" content="Devcrud">
-    <title>Rubic Landing page | Free Bootstrap 4.1 landing page</title>
+    <title>Assistant Service for going out | TEAM20</title>
     <!-- font icons -->
     <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
     <!-- Bootstrap + Rubic main styles -->
 	<link rel="stylesheet" href="assets/css/rubic.css">
+
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
-
+    <script src="results.js"></script>
     <nav id="scrollspy" class="navbar page-navbar navbar-dark navbar-expand-md fixed-top" data-spy="affix" data-offset-top="20">
         <div class="container">
-            <a class="navbar-brand" href="#"><strong class="text-primary">RU</strong><span class="text-light">BIC</span></a>
+            <a class="navbar-brand" href="#"><strong class="text-primary">TEAM</strong><span class="text-light">20</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -23,16 +25,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#features">Features</a>
+                        <a class="nav-link" href="#tabs">Weather</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="#tabs">Outfit</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#pricing">Pricing</a>
+                        <a class="nav-link" href="#pricing">Playlist</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#review">Reviews</a>
+                        <a class="nav-link" href="#review">Restaurant</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
@@ -44,39 +46,44 @@
             </div>
         </div>
     </nav>
+
     <header class="header d-flex justify-content-center">
         <div class="container">
             <div class="row h-100 align-items-center">
                 <div class="col-md-7">
                     <div class="header-content">
-                        <h3 class="header-title"><strong class="text-primary">RU</strong><span>BIC</span></h3>
-                        <h4 class="header-subtitle">Creative Mylti-purpose Bootstrap theme </h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi dolores voluptatem voluptatum adipisci vel, beatae unde! Mollitia voluptatum, ullam quisquam optio!</p>
-                        <button class="btn btn-outline-light btn-flat">Download</button>
+                        <h3 class="header-title"><strong class="text-primary">Assistant Service<br>for going out</strong></h3>
+                        <h4 class="header-subtitle">Welcome to our website</h4>
+                        <p>This page provides today's weather information, estimated travel time, music playlist, and restaurant information near the destination.</p>
+                        <!--<button class="btn btn-outline-light btn-flat">Download</button>-->
                     </div>  
                 </div>
                 <div class="col-md-5 d-none d-md-block">
                     <form class="header-form">
-                        <div class="head">Try your <span class="text-primary">Free</span> trial today.</div>
+                        <!--<div class="head">Try your <span class="text-primary">Free</span> trial today.</div>-->
                         <div class="body">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Name*">
+                                <input type="text" id="starting-point" class="form-control" placeholder="The starting point is ...">
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email*">
+                                <input type="text" id="destination" class="form-control" placeholder="The destination is ...">
                             </div>
+                        <!--
                             <div class="form-group">
                                 <input type="password" class="form-control" placeholder="Password*">
                             </div>
+                        -->
                         </div>
                         <div class="footer">
-                            <button class="btn btn-primary btn-block">Get Started</button>
+                            <!--<button class="btn btn-primary btn-block">Press Here!</button>-->
+                            <button type="button" class="btn btn-primary btn-block" onClick='showResults()'>Press Here!</button>
                         </div>
                     </form> 
                 </div>
             </div>  
         </div>
     </header>
+    <!--
     <div class="social-wrapper" id="features">
         <div class="container">
             <div class="social-txt">
@@ -93,6 +100,8 @@
             </div>
         </div>          
     </div>
+    -->
+    <div id="tabs" style="display: none;">
     <section class="section">
         <div class="container">
             <div class="row justify-content-around">
@@ -100,32 +109,36 @@
                     <div class="tabs-container">
                         <ul class="nav tab-nav" id="pills-tab">
                             <li class="item">
-                                <a class="link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"aria-selected="true">Tab 1</a>
+                                <a class="link active" id="pills-time-tab" data-toggle="pill" href="#travel-time"aria-selected="true"><strong>Time</strong></a>
                             </li>
                             <li class="item">
-                                <a class="link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"aria-selected="false">Tab 2</a>
+                                <a class="link" id="pills-weather-tab" data-toggle="pill" href="#weather-info"aria-selected="false"><strong>Weather</strong></a>
                             </li>
                             <li class="item">
-                                <a class="link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact"aria-selected="false">Tab 3</a>
+                                <a class="link" id="pills-outfit-tab" data-toggle="pill" href="#outfit-recommend"aria-selected="false"><strong>Outfit</strong></a>
+                            </li>
+                            <li class="item">
+                                <a class="link" id="pills-restaurant-tab" data-toggle="pill" href="#restaurant-recommend"aria-selected="false"><strong>Restaurant</strong></a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="pills-home">
-                                <h4 class="title">Some Title</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellendus esse consectetur possimus voluptatem veniam quas ducimus ullam deleniti? Possimus, unde eveniet suscipit perspiciatis dicta numquam voluptate fuga id, optio.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit tempore molestiae excepturi commodi ullam provident, optio dicta, nulla officiis consectetur soluta et officia neque odio blanditiis aspernatur cum cumque error?</p>
-
-                                <button class="btn btn-primary mt-3">Download</button>
+                            <div class="tab-pane fade show active" id="travel-time">
+                                <h4 class="title"><strong>Travel Time</strong></h4>
+                                <p>Write contents - 1</p>
+                                <!--<button class="btn btn-primary mt-3">Download</button>-->
                             </div>
-                            <div class="tab-pane fade" id="pills-profile">
-                                <h4 class="title">Another Title</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit unde totam nostrum, sunt accusamus in delectus aspernatur, nisi eligendi ipsum eum! Aspernatur recusandae nihil rem qui quam vero, saepe inventore tempora? Necessitatibus corporis, nam minus reiciendis rerum? Eius voluptatem facilis, vitae minima modi corrupti ullam, temporibus vel eum fugit inventore obcaecati provident ratione, ab aliquid perspiciatis commodi, autem in nemo.</p>
-                                <p><strong>Lorem ipsum dolor sit amet, consectetur adipisicing.</strong></p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit tempore molestiae excepturi commodi ullam provident, optio dicta, nulla officiis consectetur soluta et officia neque odio blanditiis aspernatur cum cumque error?</p>
+                            <div class="tab-pane fade" id="weather-info">
+                                <h4 class="title"><strong>Weather Information of the destination</strong></h4>
+                                <p>Write contents - 2</p>
                             </div>
-                            <div class="tab-pane fade" id="pills-contact">
-                                <h4 class="title">Some Other </h4>
-                                <p>Consectetur amet architecto, temporibus, debitis impedit dolore eius. Enim alias beatae architecto iusto incidunt pariatur reprehenderit impedit ipsum ex at deserunt, inventore corrupti rerum eius obcaecati. Itaque repellendus illum aut beatae ex quasi doloremque voluptatem. Numquam at possimus, obcaecati, voluptas aut vel nam recusandae pariatur error illum quaerat sunt! Ipsam rerum enim hic atque nemo debitis, voluptate obcaecati inventore culpa. Odit adipisci eos natus fugiat. Id, deserunt qui aliquam? Provident tempora repellat, repellendus consequatur quia dolor at dolore temporibus esse in rem ea necessitatibus quo nesciunt eos a dolorum voluptates, tenetur non eius quasi! Autem provident amet, maiores tenetur, eveniet dicta, laborum odio velit sint consequatur beatae nemo at! Aperiam magnam eveniet rerum, optio consequuntur quas maiores ullam necessitatibus nesciunt.</p>
+                            <div class="tab-pane fade" id="outfit-recommend">
+                                <h4 class="title"><strong>Outfit Recommendation</strong></h4>
+                                <p>Write contents - 3</p>
+                            </div>
+                            <div class="tab-pane fade" id="restaurant-recommend">
+                                <h4 class="title"><strong>Restaurant Recommendation</strong></h4>
+                                <h6>Restaurants near the Destiantion</h6>
+                                <p>Write contents - 4</p>
                             </div>
                         </div>
                     </div>
@@ -143,28 +156,14 @@
                     <img src="assets/imgs/img.jpg" alt="" class="shadow w-100">
                 </div>
                 <div class="col-md-6 col-lg-5">
-                    <h6 class="title">Section with Media list</h6>
-                    <p>Consectetur adipisicing elit. Quam odit odio et neque perferendis perspiciatis magnam hic ut facilis possimus!consectetur adipisicing elit. Impedit repellat ipsam quaerat error odit commodi.</p>
+                    <h6 class="title"><strong>A Playlist for Travel</strong></h6>
                     <ul class="list-unstyled mt-4">
+
                         <li class="media">
-                            <div class="circle-40 mr-3 mt-1"><i class="ti-gift"></i></div>
+                            <div class="circle-40 mr-3 mt-1"><button type="button" class="ti-microphone"></button></div>
                             <div class="media-body">
-                                <h6 class="mb-2">List-based media object</h6>
-                                <p>Cras sit amet nibh libero, in gravida nulla.</p>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="circle-40 mr-3 mt-1"><i class="ti-face-smile"></i></div>
-                            <div class="media-body">
-                                <h6 class="mb-2">Another one</h6>
-                                <p>Cras in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</p>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="circle-40 mr-3 mt-1"><i class="ti-microphone"></i></div>
-                            <div class="media-body">
-                                <h6 class="mb-2">One more</h6>
-                                <p>Nulla vel metus scelerisque ante sollicitudin. Cras purus odio.</p>
+                                <h6 class="mb-2">Music Playlist</h6>
+                                <p>This section provides a music playlist for travel time.<br>Click the icon to connect to Spotify Application.</p>
                             </div>
                         </li>
                     </ul>
@@ -172,6 +171,8 @@
             </div>
         </div>
     </section>
+    
+    <!--
     <section class="section">
         <div class="container">
             <div class="row justify-content-between">               
@@ -315,13 +316,16 @@
             </div>
         </div>
     </section>
+    -->
     <section class="section has-img-bg text-center">
         <div class="container">
-            <h6 class="display-3 has-line">STYLISH AXURE DESIGN</h6>
-            <h5 class="mb-5 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, itaque.</h5>
-            <button class="btn btn-outline-light btn-flat">Download</button>
+            <h6 class="display-3 has-line">Thank you for using our Service</h6>
+            <h5 class="mb-5 font-weight-light">If you want to get other results, press 'Reset' button below.</h5>
+            <button type="button" class="btn btn-outline-light btn-flat" onclick="reset()">Reset</button>
         </div>
     </section>
+
+    <!--
     <section class="section" id="contact">
         <div class="container text-center">
             <h6 class="display-4 has-line">CONTACT US</h6>
@@ -348,6 +352,8 @@
             </form>
         </div>
     </section>
+    -->
+
     <footer class="footer py-4 bg-dark text-light"> 
         <div class="container text-center">
             <p class="mb-4 small">Copyright <script>document.write(new Date().getFullYear())</script> &copy; <a href="http://www.devcrud.com">DevCRUD</a></p>
@@ -361,7 +367,7 @@
             </div>
         </div>
     </footer>
-	
+
 	<!-- core  -->
     <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
     <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
@@ -371,5 +377,6 @@
     <!-- Rubic js -->
     <script src="assets/js/rubic.js"></script>
 
+    </div>
 </body>
 </html>
