@@ -15,6 +15,18 @@
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
     <script src="results.js"></script>
+    <style>
+        #spotify-icon {
+            width: 50px;
+            height: 50px;
+        }
+        #icon-container {
+            width: 70px;
+            height: 70px;
+            overflow: hidden;
+            position: relative;
+        }
+    </style>
     <nav id="scrollspy" class="navbar page-navbar navbar-dark navbar-expand-md fixed-top" data-spy="affix" data-offset-top="20">
         <div class="container">
             <a class="navbar-brand" href="#"><strong class="text-primary">TEAM</strong><span class="text-light">20</span></a>
@@ -25,16 +37,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#tabs">Weather</a>
+                        <a class="nav-link" href="#twor">Weather</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#tabs">Outfit</a>
+                        <a class="nav-link" href="#twor">Outfit</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#pricing">Playlist</a>
+                        <a class="nav-link" href="#playlist">Playlist</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#review">Restaurant</a>
+                        <a class="nav-link" href="#twor">Restaurant</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
@@ -47,7 +59,10 @@
         </div>
     </nav>
 
-    <header class="header d-flex justify-content-center">
+    <!--              -->
+    <!-- Initial Page -->
+    <!--              -->
+    <header class="header d-flex justify-content-center"> 
         <div class="container">
             <div class="row h-100 align-items-center">
                 <div class="col-md-7">
@@ -60,50 +75,37 @@
                 </div>
                 <div class="col-md-5 d-none d-md-block">
                     <form class="header-form">
-                        <!--<div class="head">Try your <span class="text-primary">Free</span> trial today.</div>-->
+                        <div class="head"><span class="text-primary">Starting point </span>and <span class="text-primary">Destination.</span></div>
                         <div class="body">
                             <div class="form-group">
+                                <!-- Starting point input -->
                                 <input type="text" id="starting-point" class="form-control" placeholder="The starting point is ...">
                             </div>
                             <div class="form-group">
+                                <!-- Destination input -->
                                 <input type="text" id="destination" class="form-control" placeholder="The destination is ...">
                             </div>
-                        <!--
+                            
+                        </div>
+                        <div class="head"><span class="text-primary">Spotify ID</span></div>
+                        <div class="body">
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password*">
+                                <!-- Spotify ID input -->
+                                <input type="text" id="spotify-id" class="form-control" placeholder="Spotify ID" value="">
                             </div>
-                        -->
                         </div>
                         <div class="footer">
-                            <!--<button class="btn btn-primary btn-block">Press Here!</button>-->
-                            <button type="button" class="btn btn-primary btn-block" onClick='showResults()'>Press Here!</button>
+                            <button type="button" class="btn btn-primary btn-block" onClick='showResults()'>Press Here</button>
                         </div>
                     </form> 
                 </div>
             </div>  
         </div>
     </header>
-    <!--
-    <div class="social-wrapper" id="features">
-        <div class="container">
-            <div class="social-txt">
-                <h6 class="title">Social Media</h6>
-                <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus voluptate numquam sed expedita vitae ipsa?</p>
-            </div>
-            <div class="social-links">
-                <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-twitter-alt"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-google"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-pinterest-alt"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-instagram"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-rss"></i></a>
-            </div>
-        </div>          
-    </div>
-    -->
+    
     <div id="tabs" style="display: none;">
     <section class="section">
-        <div class="container">
+        <div class="container" id="twor">
             <div class="row justify-content-around">
                 <div class="col-lg-8">
                     <div class="tabs-container">
@@ -138,9 +140,11 @@
                             <div class="tab-pane fade" id="restaurant-recommend">
                                 <h4 class="title"><strong>Restaurant Recommendation</strong></h4>
                                 <h6>Restaurants near the Destiantion</h6>
+                                <input type="radio" name="place" value="restaurant" checked="checked"/> Restaurant<p>  </p>
+                                <input type="radio" name="place" value="cafe"/>Cafe
                                 <p>Write contents - 4</p>
                             </div>
-                        </div>
+                        </div> 
                     </div>
                 </div>
                 <div class="col-lg-4 d-none d-lg-block align-self-center">
@@ -150,7 +154,7 @@
         </div>                      
     </section>
     <section class="section">
-        <div class="container">
+        <div class="container" id="playlist">
             <div class="row justify-content-between">
                 <div class="col-md-5 align-self-center mb-4 mb-md-0">
                     <img src="assets/imgs/img.jpg" alt="" class="shadow w-100">
@@ -160,10 +164,17 @@
                     <ul class="list-unstyled mt-4">
 
                         <li class="media">
-                            <div class="circle-40 mr-3 mt-1"><button type="button" class="ti-microphone"></button></div>
+                            <!--스포티파이 하이퍼링크-->
+                            <div class="container" id="icon-container">
+                                <!--하이퍼링크는 일단 임시로 넣어놨습니다-->
+                                <a href="https://www.spotify.com/" target="_blank">
+                                    <img src="Spotify_icon.png" id="spotify-icon" alt="spotify-icon"/>
+                                </a>
+                            </div>
+                            
                             <div class="media-body">
                                 <h6 class="mb-2">Music Playlist</h6>
-                                <p>This section provides a music playlist for travel time.<br>Click the icon to connect to Spotify Application.</p>
+                                <p>This section provides a music playlist for travel time. Click the icon to connect to Spotify Application.</p>
                             </div>
                         </li>
                     </ul>
