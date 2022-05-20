@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="ko">
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,6 +15,9 @@
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
     <script src="results.js"></script>
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBT2CB-qs3afjJG6fN6Jj5wQqB1hQVNdTQ&callback=showTravelTime">
+		</script>
     <nav id="scrollspy" class="navbar page-navbar navbar-dark navbar-expand-md fixed-top" data-spy="affix" data-offset-top="20">
         <div class="container">
             <a class="navbar-brand" href="#"><strong class="text-primary">TEAM</strong><span class="text-light">20</span></a>
@@ -76,11 +79,11 @@
                         </div>
                         <div class="footer">
                             <!--<button class="btn btn-primary btn-block">Press Here!</button>-->
-                            <button type="button" class="btn btn-primary btn-block" onClick='showResults()'>Press Here!</button>
+                            <button id="init" type="button" class="btn btn-primary btn-block" onClick='showResults()'>Press Here!</button>
                         </div>
-                    </form> 
+                    </form>
                 </div>
-            </div>  
+            </div>
         </div>
     </header>
     <!--
@@ -124,12 +127,13 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="travel-time">
                                 <h4 class="title"><strong>Travel Time</strong></h4>
-                                <p>Write contents - 1</p>
+                                <p id="travel-time-content">Write contents - 1</p>
                                 <!--<button class="btn btn-primary mt-3">Download</button>-->
                             </div>
                             <div class="tab-pane fade" id="weather-info">
                                 <h4 class="title"><strong>Weather Information of the destination</strong></h4>
-                                <p>Write contents - 2</p>
+																<img id="weathericon" src="" alt="" class="">
+																<p id="weather-info-content">Write contents - 2</p>
                             </div>
                             <div class="tab-pane fade" id="outfit-recommend">
                                 <h4 class="title"><strong>Outfit Recommendation</strong></h4>
