@@ -33,6 +33,10 @@ function offDisplay() {
     $('#tabs').hide();
 }
 
+
+/*
+ * 옷 추천 서비스
+*/
 function setTempType(temp) {
     var temp_type = 0;
     if (temp >= 28) temp_type++;
