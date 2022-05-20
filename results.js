@@ -35,7 +35,9 @@ function offDisplay() {
 
 
 /*
+ *
  * 옷 추천 서비스
+ *
 */
 function setTempType(temp) {
     var temp_type = 0;
