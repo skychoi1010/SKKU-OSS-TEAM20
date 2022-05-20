@@ -6,9 +6,6 @@ const place_type = {
 function showResults() {
   onDisplay();
   showTravelTime();
-
-  var start = document.getElementById('starting-point').value;
-  var dest = document.getElementById('destination').value;
   var user_id = document.getElementById('spotify-id').value;
 
   var place_radio = document.getElementsByName('place');
@@ -112,6 +109,7 @@ function showWeather(event) {
     let iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
     document.querySelector("#weathericon").src = iconUrl;
     let temp_cur = (response.main.temp - 273.15).toFixed(1);
+    localStorage.setItem("temp-cur", temp_cur);
     let temp_max = (response.main.temp_max - 273.15).toFixed(1);
     let temp_min = (response.main.temp_min - 273.15).toFixed(1);
     let feels_like = (response.main.feels_like - 273.15).toFixed(1);
@@ -136,23 +134,10 @@ function printWeather(dest_format, temp_cur, temp_max, temp_min, feels_like, des
 /*
  * 옷 추천 서비스
 */
-function setTempType(temp) {
-    var temp_type = 0;
-    if (temp >= 28) temp_type++;
-    if (temp >= 23) temp_type++;
-    if (temp >= 20) temp_type++;
-    if (temp >= 17) temp_type++;
-    if (temp >= 12) temp_type++;
-    if (temp >= 9) temp_type++;
-    if (temp >= 5) temp_type++;
-
-    return temp_type;
-}
 
 //temp_curr : 현재 기온
-function overcoat(temp_curr) {
+function overcoat(temp_type) {
     var overcoats = [];
-    const temp_type = setTempType(temp_curr);
 
     switch(temp_type) { // temparature range
         case 0: // ( , 5)
@@ -194,9 +179,8 @@ function overcoat(temp_curr) {
     return overcoats;
 }
 
-function topOutfit(temp_curr) {
+function topOutfit(temp_type) {
     var tops = [];
-    const temp_type = setTempType(temp_curr);
 
     switch(temp_type) { // temparature range
         case 0: // ( , 5)
@@ -239,9 +223,8 @@ function topOutfit(temp_curr) {
     return tops;
 }
 
-function bottomOutfit(temp_curr) {
+function bottomOutfit(temp_type) {
     var bottoms = [];
-    const temp_type = setTempType(temp_curr);
 
     switch(temp_type) { // temparature range
         case 0: // ( , 5)
@@ -280,36 +263,43 @@ function bottomOutfit(temp_curr) {
     return bottoms;
 }
 
-const temp_curr_ = 25.0; // this is a temporary code
-
 function showOutfit() {
-    const coat = overcoat(temp_curr_);
-    const top = topOutfit(temp_curr_);
-    const bottom = bottomOutfit(temp_curr_);
+    var temp_type = 0;
+    var temp = localStorage.getItem("temp-cur");
+    if (temp >= 28) temp_type++;
+    if (temp >= 23) temp_type++;
+    if (temp >= 20) temp_type++;
+    if (temp >= 17) temp_type++;
+    if (temp >= 12) temp_type++;
+    if (temp >= 9) temp_type++;
+    if (temp >= 5) temp_type++;
+    const coat = overcoat(temp_type);
+    const top = topOutfit(temp_type);
+    const bottom = bottomOutfit(temp_type);
 
     var recommend = "";
     if (coat.length === 0) {
         recommend += "You don't need to take outer clothing.";
     }
     else {
-        recommend += "Recommended Outer Clothing : ";
+        recommend += "<strong>Outer Clothing</strong> : ";
         for (let item of coat) {
             recommend += item + ", ";
         }
-        recommend.slice(0, -2);
+        recommend = recommend.slice(0, recommend.length - 2);
     }
 
-    recommend += "<br><br>Recommend Top : ";
+    recommend += "<br><br><br><strong>Top</strong> : ";
     for (let item of top) {
         recommend += item + ", ";
     }
-    recommend.slice(0, -2);
+    recommend = recommend.slice(0, recommend.length - 2);
     
-    recommend += "<br><br>Recommend Bottoms : ";
+    recommend += "<br><br><br><strong>Bottoms</strong> : ";
     for (let item of bottom) {
         recommend += item + ", ";
     }
-    recommend.slice(0, -2);
+    recommend = recommend.slice(0, recommend.length - 2);
 
     document.getElementById("outfit-recommend-content").innerHTML = recommend;
 }
