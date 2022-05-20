@@ -30,7 +30,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places(); 
 
-var loc = "성균관대";
+var loc = localStorage.getItem('dest');
 var category = ['맛집', '카페'];
 var categoryidx = 0;
 var keyword = loc + ' ' + category[categoryidx];

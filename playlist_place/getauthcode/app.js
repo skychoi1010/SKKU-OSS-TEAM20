@@ -14,7 +14,7 @@
  var cookieParser = require('cookie-parser');
  
  var client_id = '70becd8a2c0744a8b7bd5ff888f92ad2'; // Your client id
- var client_secret = 'MYSECRETCODE'; // Your secret
+ var client_secret = 'MYUSERCODE'; // Your secret
  var redirect_uri = 'http://localhost:8080/callback'; // Your redirect uri
  
  /**
@@ -46,7 +46,7 @@
    res.cookie(stateKey, state);
  
    // your application requests authorization
-   var scope = 'playlist-modify-public';
+   var scope = 'playlist-modify-public playlist-read-public';
    res.redirect('https://accounts.spotify.com/authorize?' +
      querystring.stringify({
        response_type: 'code',

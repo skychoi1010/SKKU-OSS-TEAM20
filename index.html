@@ -15,6 +15,8 @@
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
     <script src="results.js"></script>
+    <script src="playlist.js">    
+    </script>
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBT2CB-qs3afjJG6fN6Jj5wQqB1hQVNdTQ&callback=showTravelTime">
 		</script>
@@ -164,7 +166,7 @@
                     <ul class="list-unstyled mt-4">
 
                         <li class="media">
-                            <div class="circle-40 mr-3 mt-1"><button type="button" class="ti-microphone"></button></div>
+                            <div class="circle-40 mr-3 mt-1"><button type="button" onclick="getPlaylist()" class="ti-microphone"></button></div>
                             <div class="media-body">
                                 <h6 class="mb-2">Music Playlist</h6>
                                 <p>This section provides a music playlist for travel time.<br>Click the icon to connect to Spotify Application.</p>
