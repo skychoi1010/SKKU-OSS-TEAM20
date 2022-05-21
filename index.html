@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
     <!-- Bootstrap + Rubic main styles -->
 	<link rel="stylesheet" href="assets/css/rubic.css">
+    <!-- google icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=409808e22e221a79684b538497ac9747&libraries=services,places"></script>
@@ -23,8 +25,8 @@
     <script src="results.js"></script>
     <script src="playlist.js"></script>
     <script src="place.js"></script>
-    
-        <style>
+
+    <style>
         #spotify-icon {
             width: 50px;
             height: 50px;
@@ -35,7 +37,24 @@
             overflow: hidden;
             position: relative;
         }
+        .material-symbols-outlined {
+            width: 30px;
+            height: 30px;
+
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 64
+            
+        }
         
+        .first {
+            float: left;
+        }
+        .second {
+            float: left;
+        }
     </style>
     
     <nav id="scrollspy" class="navbar page-navbar navbar-dark navbar-expand-md fixed-top" data-spy="affix" data-offset-top="20">
@@ -111,7 +130,7 @@
             </div>
         </div>
     </header>
-    
+
     <!--                      -->
     <!-- After getting inputs -->
     <!--                      -->
@@ -137,11 +156,40 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="travel-time">
-                                <h4 class="title"><strong>Travel Time</strong></h4>
-                                <h6 id="start-point-content">Error : You did not enter a starting point!</h6>
-                                <h6 id="travel-time-content">Error : time : null</h6>
-                                <h6 id="dest-point-content">Error : You did not enter a destiantion</h6>
-                                <!--<button class="btn btn-primary mt-3">Download</button>-->
+                                <h4 class="title"><strong>Travel Time</strong></h4><p><br></p>
+                                <table>
+                                <tr>
+                                    <td>
+                                    <span class="material-symbols-outlined">
+                                        pin_drop
+                                    </span>
+                                    </td>
+                                    <td>   
+                                    <h6 class="txt-point" id="start-point-content">Error : You did not enter a starting point!</h6>
+                                    </td>
+                                </tr>
+                                <tr height="120">
+                                    <td>
+                                        <span class="material-symbols-outlined">
+                                            more_vert
+                                        </span>
+                                    </td>
+                                    <td>
+                                    <h6 class="txt-time" id="travel-time-content">Error : time : null</h6>
+                                    </td>
+                                </tr>
+                                <tr>  
+                                    <td>
+                                    <span class="material-symbols-outlined">
+                                        pin_drop
+                                    </span>
+                                    </td>
+                                    <td>
+                                    <h6 class="txt-point second" id="dest-point-content">Error : You did not enter a destiantion</h6>
+                                    </td>
+                                </tr> 
+                                </table>
+                                    <!--<button class="btn btn-primary mt-3">Download</button>-->
                             </div>
                             <div class="tab-pane fade" id="weather-info">
                                 <h4 class="title"><strong>Weather Information of the destination</strong></h4>
@@ -166,7 +214,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 d-none d-lg-block align-self-center">
-                    <img src="assets/imgs/eiffel-tower.svg" alt="" class="w-100 tower">         <!--이미지 변경할 것-->
+                    <img src="assets/imgs/eiffel-tower.svg" alt="" class="w-100 tower">
                 </div>
             </div>                  
         </div>                      

@@ -120,7 +120,7 @@ function showWeather(event) {
 function printTraveltime(start_format, dest_format, duration_text) {
     $('#start-point-content').html('The starting point is<br><I>' + start_format + '</I>');
     $('#dest-point-content').html('The destination is<br><I>' + dest_format + '</I>');
-    $('#travel-time-content').html('It takes about<I>' + duration_text + '</I><br>by using public transportation');
+    $('#travel-time-content').html('It takes about <I>' + duration_text + '</I><br><p>by using public transportation<p>');
 }
 
 function printWeather(dest_format, temp_cur, temp_max, temp_min, feels_like, description) {
