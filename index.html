@@ -11,14 +11,20 @@
     <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
     <!-- Bootstrap + Rubic main styles -->
 	<link rel="stylesheet" href="assets/css/rubic.css">
+    
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=409808e22e221a79684b538497ac9747&libraries=services,places"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBT2CB-qs3afjJG6fN6Jj5wQqB1hQVNdTQ&callback=showTravelTime">
+	</script>    
 
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
     <script src="results.js"></script>
-		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBT2CB-qs3afjJG6fN6Jj5wQqB1hQVNdTQ&callback=showTravelTime">
-		</script>
-    <style>
+    <script src="playlist.js"></script>
+    <script src="place.js"></script>
+    
+        <style>
         #spotify-icon {
             width: 50px;
             height: 50px;
@@ -31,6 +37,7 @@
         }
         
     </style>
+    
     <nav id="scrollspy" class="navbar page-navbar navbar-dark navbar-expand-md fixed-top" data-spy="affix" data-offset-top="20">
         <div class="container">
             <a class="navbar-brand" href="#"><strong class="text-primary">TEAM</strong><span class="text-light">20</span></a>
@@ -47,13 +54,10 @@
                         <a class="nav-link" href="#twor">Outfit</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#twor">Place</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#playlist">Playlist</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#twor">Restaurant</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link btn btn-primary text-dark shadow-none ml-md-4" href="components.html">Components</a>
@@ -128,36 +132,41 @@
                                 <a class="link" id="pills-outfit-tab" data-toggle="pill" href="#outfit-recommend"aria-selected="false"><strong>Outfit</strong></a>
                             </li>
                             <li class="item">
-                                <a class="link" id="pills-restaurant-tab" data-toggle="pill" href="#restaurant-recommend"aria-selected="false"><strong>Restaurant</strong></a>
+                                <a class="link" id="pills-restaurant-tab" data-toggle="pill" href="#restaurant-recommend"aria-selected="false"><strong>Place</strong></a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="travel-time">
                                 <h4 class="title"><strong>Travel Time</strong></h4>
-                                <p id="travel-time-content">Write contents - 1</p>
+                                <h6 id="start-point-content">Error : You did not enter a starting point!</h6>
+                                <h6 id="travel-time-content">Error : time : null</h6>
+                                <h6 id="dest-point-content">Error : You did not enter a destiantion</h6>
                                 <!--<button class="btn btn-primary mt-3">Download</button>-->
                             </div>
                             <div class="tab-pane fade" id="weather-info">
                                 <h4 class="title"><strong>Weather Information of the destination</strong></h4>
 																<img id="weathericon" src="" alt="" class="">
-																<p id="weather-info-content">Write contents - 2</p>
+																<p id="weather-info-content">Error : You did not enter a starting point and a destination</p>
                             </div>
                             <div class="tab-pane fade" id="outfit-recommend">
-                                <h4 class="title"><strong>Outfit Recommendation</strong></h4>
-                                <p id="outfit-recommend-content">Write contents - 3</p>
+                                <h4 class="title"><strong>Outfit Recommendation</strong><br><br></h4>
+                                <p id="outfit-recommend-content">Error : You did not enter a starting point and a destination</p>
                             </div>
                             <div class="tab-pane fade" id="restaurant-recommend">
-                                <h4 class="title"><strong>Restaurant Recommendation</strong></h4>
-                                <h6>Restaurants near the Destiantion</h6>
-                                <input type="radio" name="place" value="restaurant" checked="checked"/> Restaurant<p>  </p>
-                                <input type="radio" name="place" value="cafe"/>Cafe
-                                <p>Write contents - 4</p>
+                                <h4 class="title"><strong>Place Recommendation</strong></h4>
+                                <h6>Restaurants/Cafe near the Destiantion</h6>
+                                    <input type="radio" name="place" value="restaurant" checked="checked"/> Restaurant<p>  </p>
+                                    <input type="radio" name="place" value="cafe"/> Cafe
+                                <div id="show-place-button-container">
+                                    <button type="button" id="show-place-button" class="btn btn-secondary" style="float: left" onclick="showPlaces()">show places</button>
+                                </div>
+                                <div class="container" id="map" style="width:100%;height:350px;"></div>
                             </div>
                         </div> 
                     </div>
                 </div>
                 <div class="col-lg-4 d-none d-lg-block align-self-center">
-                    <img src="assets/imgs/eiffel-tower.svg" alt="" class="w-100 tower">
+                    <img src="assets/imgs/eiffel-tower.svg" alt="" class="w-100 tower">         <!--이미지 변경할 것-->
                 </div>
             </div>                  
         </div>                      
@@ -191,7 +200,7 @@
             </div>
         </div>
     </section>
-    
+
     <!--
     <section class="section">
         <div class="container">

@@ -5,16 +5,10 @@ const place_type = {
 
 function showResults() {
   onDisplay();
+
   showTravelTime();
-  var user_id = document.getElementById('spotify-id').value;
-
-  var place_radio = document.getElementsByName('place');
-  var place_name = place_radio[0].value;
-  if (place_radio[1].checked == true) {
-      place_name = place_radio[1].value;
-  }
-
   showOutfit();
+  //showPlace();
 }
 
 function reset() {
@@ -47,6 +41,7 @@ function showTravelTime() {
   var geocoder = new google.maps.Geocoder();
   start = document.getElementById('starting-point').value;
   dest = document.getElementById('destination').value;
+  localStorage.setItem('dest', dest);
   // console.log(start + dest);
   geocoder.geocode( {'address': start}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
@@ -123,7 +118,9 @@ function showWeather(event) {
 }
 
 function printTraveltime(start_format, dest_format, duration_text) {
-  $('#travel-time-content').html('The starting point is<br>' + start_format + '<br><br>It takes about ' + duration_text + '<br>by using public transportation<br><br>The destination is<br>' + dest_format);
+    $('#start-point-content').html('The starting point is<br><I>' + start_format + '</I>');
+    $('#dest-point-content').html('The destination is<br><I>' + dest_format + '</I>');
+    $('#travel-time-content').html('It takes about<I>' + duration_text + '</I><br>by using public transportation');
 }
 
 function printWeather(dest_format, temp_cur, temp_max, temp_min, feels_like, description) {
