@@ -34,9 +34,9 @@ $ http~~
   
    2. weather at destination: In main page`(main page-> press here!)`, scroll down or click 'Weather' navbar item to see the tab that shows weather information ( temparature - current, sensible, highest, lowest / the current sky condition ) at the destination.
   
-   3. outfit : In main page (main page-> press here!)`, scroll down or click 'Outfit' navbar item to see the tab that shows outfit recommendation ( overcoats / tops / bottoms ) based on current temparature.
+   3. outfit : In main page`(main page-> press here!)`, scroll down or click 'Outfit' navbar item to see the tab that shows outfit recommendation ( overcoats / tops / bottoms ) based on current temparature.
   
-   4. Restaurant : In main page (main page-> press here!)`, scroll down or click 'Place' navbar item, and check radio button ( restaurant / cafe ) to see the tab that shows the map that can get place information.
+   4. Restaurant : In main page`(main page-> press here!)`, scroll down or click 'Place' navbar item, and check radio button ( restaurant / cafe ) to see the tab that shows the map that can get place information.
     
    5. playlist: At bottom page In main page`(main page-> press here! -> travel time ~~~)`, ~~~
   ![image](imageurl of main page)
