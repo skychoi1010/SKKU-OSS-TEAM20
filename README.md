@@ -47,7 +47,7 @@ $ p
 
 4. Open file index.html in public directory, or just load 127.0.0.1:3000/ in your chrome. Either way, it will show you the main page of the application.
 
-![image](https://user-images.githubusercontent.com/55489991/143690402-d60f2d5e-3f64-4136-a18a-c900c5798eec.png)
+![image](imageurl of main page)
 
 ## Main Functions of Stock Trading AI bot
 
