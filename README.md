@@ -30,13 +30,13 @@ $ http~~
 
 3. Get results
 
-   1. travel time by public transportation: In main page`(main page-> press here! -> travel time ~~~)`, ~~~
+   1. travel time by public transportation: In main page`(main page-> press here!)`, scroll down to see the tab that shows how long it takes to get to the destination.
   
-   2. weather at destination: In main page`(main page-> press here! -> travel time ~~~)`, ~~~
+   2. weather at destination: In main page`(main page-> press here!)`, scroll down or click 'Weather' navbar item to see the tab that shows weather information ( temparature - current, sensible, highest, lowest / the current sky condition ) at the destination.
   
-   3. outfit
+   3. outfit : In main page (main page-> press here!)`, scroll down or click 'Outfit' navbar item to see the tab that shows outfit recommendation ( overcoats / tops / bottoms ) based on current temparature.
   
-   4. Restaurant
+   4. Restaurant : In main page (main page-> press here!)`, scroll down or click 'Place' navbar item, and check radio button ( restaurant / cafe ) to see the tab that shows the map that can get place information.
     
    5. playlist: At bottom page In main page`(main page-> press here! -> travel time ~~~)`, ~~~
   ![image](imageurl of main page)
@@ -47,7 +47,9 @@ $ http~~
 
 ### Weather at destination
 
-### Out fit
+### Outfit
+An algorithm was written in JavaScript to recommend outfits according to the temparature information obtained from 'Weather at destination' function.
+It categorizes temperatures into eight ranges and recommends overcoats, tops, and bottoms for each range. 
 
 ### Restaurant
 Kakao OpenApi provide KakaoMap Api
