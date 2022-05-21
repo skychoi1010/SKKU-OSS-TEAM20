@@ -47,6 +47,7 @@ function showTravelTime() {
   var geocoder = new google.maps.Geocoder();
   start = document.getElementById('starting-point').value;
   dest = document.getElementById('destination').value;
+  localStorage.setItem("dest", dest);
   // console.log(start + dest);
   geocoder.geocode( {'address': start}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
@@ -88,6 +89,7 @@ function showTravelTime() {
       // console.log(JSON.stringify(response));
       let duration_text = response['rows'][0]['elements'][0].duration.text;
       duration = response['rows'][0]['elements'][0].duration.value;
+      localStorage.setItem("duration", duration.toString());
       // console.log(duration);
       printTraveltime(start_format, dest_format, duration_text);
     }
@@ -115,6 +117,7 @@ function showWeather(event) {
     let feels_like = (response.main.feels_like - 273.15).toFixed(1);
     let description = response.weather[0].description;
     weather = JSON.stringify(response.main);
+    localStorage.setItem("weather", response.weather[0].main);
     // console.log(description);
     printWeather(dest_format, temp_cur, temp_max, temp_min, feels_like, description);
   }).catch((error) => {

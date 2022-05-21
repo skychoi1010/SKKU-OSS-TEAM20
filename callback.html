@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <script>
+
+        token = window.location.hash.substr(1).split('&')[0].split("=")[1]
+        if(token)
+            localStorage.setItem('accessToken',token);
+        window.close();
+    </script>
+    </body>
+</html>
