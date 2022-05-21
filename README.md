@@ -29,11 +29,16 @@ $ http~~
 2. input your start and dest and Press Button
 
 3. Get results
-  1. travel time by public transportation: In main page`(main page-> press here! -> travel time ~~~)`, ~~~
-  2. weather at destination: In main page`(main page-> press here! -> travel time ~~~)`, ~~~
-  3. outfit
-  4. Restaurant
-  5. playlist: At bottom page In main page`(main page-> press here! -> travel time ~~~)`, ~~~
+
+   1. travel time by public transportation: In main page`(main page-> press here! -> travel time ~~~)`, ~~~
+  
+   2. weather at destination: In main page`(main page-> press here! -> travel time ~~~)`, ~~~
+  
+   3. outfit
+  
+   4. Restaurant
+    
+   5. playlist: At bottom page In main page`(main page-> press here! -> travel time ~~~)`, ~~~
   ![image](imageurl of main page)
 
 ## Implementation of Main Function
