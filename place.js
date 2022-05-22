@@ -20,11 +20,10 @@ function showPlaces() {
     var ps = new kakao.maps.services.Places(); 
 
     var place_radio = document.getElementsByName('place');
-    var place_name = place_radio[0].value;
+    var categoryidx = 0;
     if (place_radio[1].checked == true) {
-        place_name = place_radio[1].value;
+        categoryidx = 1;
     }
-    var categoryidx = place_type[place_name];
     var loc = localStorage.getItem('dest');
     var category = ['맛집', '카페'];
     var keyword = loc + ' ' + category[categoryidx];
