@@ -4,7 +4,7 @@
 -   Opensource Software Project
 -   Team 20
 
-## [Go to our website](https://skychoi1010.github.com/SKKU-OSS-TEAM20/)
+## [Go to our website](https://skychoi1010.github.io/SKKU-OSS-TEAM20/)
 
 <img width="1320" alt="screenshot" src="https://user-images.githubusercontent.com/50130497/169692899-39ba0a58-ea63-4c83-b7da-811918d25c52.png">
 
@@ -30,7 +30,7 @@ Before going out, use our site, get our support and enjoy your appointment!
 
 ## How to use/run our service
 
-1. access our website: [link](https://skychoi1010.github.com/SKKU-OSS-TEAM20/)
+1. access our website: [link](https://skychoi1010.github.io/SKKU-OSS-TEAM20/)
 
 2. input your start and destination address and click on 'Press Here!' Button
 
