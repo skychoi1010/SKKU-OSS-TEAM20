@@ -126,7 +126,7 @@ function printTraveltime(start_format, dest_format, duration_text) {
 }
 
 function printWeather(dest_format, temp_cur, temp_max, temp_min, feels_like, description) {
-  $('#weather-info-content').html('We expect ' + description + ' at ' + dest_format + '.<br><br>The temperature will be max ' + temp_max + '&#8451; and min ' + temp_min + '&#8451;.<br>It is now ' + temp_cur + '&#8451; and it feels like ' + feels_like + '&#8451;.<br>');
+  $('#weather-info-content').html('<br><br>&ensp;We expect ' + description + ' at ' + dest_format + '.<br><br>&ensp;The temperature will be max ' + temp_max + '&#8451; and min ' + temp_min + '&#8451;.<br>&ensp;It is now ' + temp_cur + '&#8451; and it feels like ' + feels_like + '&#8451;.<br>');
 }
 
 
