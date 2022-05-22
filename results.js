@@ -303,7 +303,7 @@ function showOutfit() {
         recommend += "You don't need to take outer clothing.";
     }
     else {
-        recommmend += "<strong>";
+        recommend += "<strong>";
         for (let item of coat) {
             recommend += item;
         }
