@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-md-5 d-md-block">   <!-- delete d-none -->
                     <form class="header-form">
-                        <div class="head"><span class="text-primary">Starting point </span>and <span class="text-primary">Destination.</span></div>
+                        <div id="start-dest" class="head">Enter <span class="text-primary">Starting point </span>and <span class="text-primary">Destination</span></div>
                         <div class="body">
                             <div class="form-group">
                                 <!-- Starting point input -->
@@ -150,9 +150,13 @@
                                     <!--<button class="btn btn-primary mt-3">Download</button>-->
                             </div>
                             <div class="tab-pane fade" id="weather-info">
-                                <h4 class="title"><strong><br>&ensp;Weather Information of the destination</strong></h4>
-																<img id="weathericon" src="" alt="" class="">
-																<p id="weather-info-content">Error : You did not enter a starting point and a destination</p>
+                                <h4 class="title"><strong><br>Weather Information of the destination</strong></h4>
+																<div id="weathericon-container" class="">
+																	<img id="weathericon" src="" alt="" class="">
+																	<div id="weather-info-content">
+																		<p><strong>Error : You did not enter a starting point and a destination</strong></p>
+																	</div>
+																</div>
                             </div>
                             <div class="tab-pane fade" id="outfit-recommend">
                                 <h4 class="title"><strong>Outfit Recommendation</strong><br><br></h4>
@@ -160,9 +164,11 @@
                             </div>
                             <div class="tab-pane fade" id="restaurant-recommend">
                                 <h4 class="title"><strong>Place Recommendation</strong></h4>
-                                <h6>Restaurants/Cafe near the Destination</h6>
-                                    <input type="radio" name="place" value="restaurant" checked="checked"/> Restaurant<p>  </p>
-                                    <input type="radio" name="place" value="cafe"/> Cafe
+																<h6>Restaurants and Cafe near the Destination</h6>
+																<div id="place_radio">
+																	<input type="radio" name="place" value="restaurant" checked="checked"/>&ensp;<strong>Restaurant</strong>&ensp;&ensp;
+																	<input type="radio" name="place" value="cafe"/>&ensp;<strong>Cafe</strong>
+																</div>
                                 <div id="show-place-button-container">
                                     <button type="button" id="show-place-button" class="btn btn-secondary" style="float: left" onclick="showPlaces()">show places</button>
                                 </div>
@@ -182,17 +188,13 @@
             <div class="row justify-content-between">
                 <div class="col-md-6 col-lg-5" style="margin:auto;">
                     <h6 class="title"><strong>A Playlist for Travel</strong></h6>
-                    <ul class="list-unstyled mt-4">
-                        <li>
-                            <div class="container" id="icon-container">
-                                <img src="./assets/imgs/Spotify_icon.png" id="spotify-icon" alt="spotify-icon" onclick="getPlaylist()"/>
-                            </div>
-                            <div class="container">
-                                <h6 class="mb-2">&ensp;Music Playlist</h6>
-                                <p>&ensp;This section provides a music playlist for travel time.<br>&ensp;Click the icon to connect to Spotify Application.</p>
-                            </div>
-                        </li>
-                    </ul>
+										<div class="container" id="icon-container">
+												<img src="./assets/imgs/Spotify_icon.png" id="spotify-icon" alt="spotify-icon" onclick="getPlaylist()"/>
+												<div id="playlist-content">
+													<h6 class="mb-2">Music Playlist</h6>
+													<p>This section provides a music playlist for travel time.<br>Click the icon to connect to Spotify Application.</p>
+												</div>
+										</div>
                 </div>
             </div>
         </div>

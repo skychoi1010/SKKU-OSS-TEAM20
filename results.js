@@ -123,6 +123,7 @@ function showWeather(event) {
     let icon = response.weather[0].icon;
     let iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
     document.querySelector("#weathericon").src = iconUrl;
+    $("#weathericon").css('height', '100px');
     let temp_cur = (response.main.temp - 273.15).toFixed(1);
     localStorage.setItem("temp-cur", temp_cur);
     let temp_max = (response.main.temp_max - 273.15).toFixed(1);
@@ -145,7 +146,7 @@ function printTraveltime(start_format, dest_format, duration_text) {
 }
 
 function printWeather(dest_format, temp_cur, temp_max, temp_min, feels_like, description) {
-  $('#weather-info-content').html('<br><br>&ensp;We expect ' + description + ' at ' + dest_format + '.<br><br>&ensp;The temperature will be max ' + temp_max + '&#8451; and min ' + temp_min + '&#8451;.<br>&ensp;It is now ' + temp_cur + '&#8451; and it feels like ' + feels_like + '&#8451;.<br>');
+  $('#weather-info-content').html('<strong>We expect ' + description + ' at  ' + dest_format + '.<br><br>The temperature will be max ' + temp_max + ' &#8451; and min ' + temp_min + ' &#8451;.<br>It is now ' + temp_cur + ' &#8451; and it feels like ' + feels_like + ' &#8451;.</strong>');
 }
 
 
