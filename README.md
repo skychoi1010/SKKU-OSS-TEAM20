@@ -64,8 +64,8 @@ You can fork our repository and create pull request. Drafts are provided in our 
 
 ## Bug fix issue tracker ~~
 
-Currently, there is a bug in which the server stops when trying to search outside index.html. If anyone can solve it, I would appreciate it if you could help us ~~~
-A bug that first playlist genereation is not work correctly. So user must re-click button.
+Currently, there is a bug in which a bug that first playlist genereation is not work correctly. So user must re-click button. If anyone can solve it, I would appreciate it if you could help us.
+
 
 ## License
 
