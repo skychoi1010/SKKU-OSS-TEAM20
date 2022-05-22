@@ -1,131 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="ko">
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with Rubic landing page.">
-    <meta name="author" content="Devcrud">
-    <title>Rubic Landing page | Free Bootstrap 4.1 landing page</title>
+    <title>Assistant Service for going out | TEAM20</title>
     <!-- font icons -->
-    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
-    <!-- Bootstrap + Rubic main styles -->
-	<link rel="stylesheet" href="assets/css/rubic.css">
+    <!-- <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css"> -->
+	<link rel="stylesheet" href="assets/css/style.css">
+    <!-- google icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=409808e22e221a79684b538497ac9747&libraries=services,places"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBT2CB-qs3afjJG6fN6Jj5wQqB1hQVNdTQ&callback=showTravelTime">
+	</script>
+
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+    <script src="results.js"></script>
+    <script src="playlist.js"></script>
+    <script src="place.js"></script>
 
     <nav id="scrollspy" class="navbar page-navbar navbar-dark navbar-expand-md fixed-top" data-spy="affix" data-offset-top="20">
         <div class="container">
-            <a class="navbar-brand" href="#"><strong class="text-primary">RU</strong><span class="text-light">BIC</span></a>
+            <a class="navbar-brand" href="#"><strong class="text-primary">TEAM</strong><span class="text-light">20</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#features">Features</a>
+                        <a class="nav-link" href="#twor">Weather</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="#twor">Outfit</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#pricing">Pricing</a>
+                        <a class="nav-link" href="#twor">Place</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#review">Reviews</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-dark shadow-none ml-md-4" href="components.html">Components</a>
+                        <a class="nav-link" href="#playlist">Playlist</a>
                     </li>
                 </ul>
             </div>
+
         </div>
     </nav>
+
+    <!--              -->
+    <!-- Initial Page -->
+    <!--              -->
     <header class="header d-flex justify-content-center">
         <div class="container">
             <div class="row h-100 align-items-center">
                 <div class="col-md-7">
                     <div class="header-content">
-                        <h3 class="header-title"><strong class="text-primary">RU</strong><span>BIC</span></h3>
-                        <h4 class="header-subtitle">Creative Mylti-purpose Bootstrap theme </h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi dolores voluptatem voluptatum adipisci vel, beatae unde! Mollitia voluptatum, ullam quisquam optio!</p>
-                        <button class="btn btn-outline-light btn-flat">Download</button>
-                    </div>  
+                        <h3 class="header-title"><strong class="text-primary">Assistant Service<br>for going out</strong></h3>
+                        <h4 class="header-subtitle">Welcome to our website</h4>
+                        <p>This page provides today's weather information, estimated travel time, music playlist, and restaurant information near the destination.</p>
+                        <!--<button class="btn btn-outline-light btn-flat">Download</button>-->
+                    </div>
                 </div>
-                <div class="col-md-5 d-none d-md-block">
+                <div class="col-md-5 d-md-block">   <!-- delete d-none -->
                     <form class="header-form">
-                        <div class="head">Try your <span class="text-primary">Free</span> trial today.</div>
+                        <div id="start-dest" class="head">Enter <span class="text-primary">Starting point </span>and <span class="text-primary">Destination</span></div>
                         <div class="body">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Name*">
+                                <!-- Starting point input -->
+                                <input type="text" id="starting-point" class="form-control" placeholder="The starting point is ...">
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email*">
+                                <!-- Destination input -->
+                                <input type="text" id="destination" class="form-control" placeholder="The destination is ...">
                             </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password*">
-                            </div>
+
                         </div>
+
                         <div class="footer">
-                            <button class="btn btn-primary btn-block">Get Started</button>
+                            <!--<button class="btn btn-primary btn-block">Press Here!</button>-->
+                            <button id="init" type="button" class="btn btn-primary btn-block" onClick='showResults()'>Press Here!</button>
                         </div>
-                    </form> 
+                    </form>
                 </div>
-            </div>  
+            </div>
+
         </div>
     </header>
-    <div class="social-wrapper" id="features">
-        <div class="container">
-            <div class="social-txt">
-                <h6 class="title">Social Media</h6>
-                <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus voluptate numquam sed expedita vitae ipsa?</p>
-            </div>
-            <div class="social-links">
-                <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-twitter-alt"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-google"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-pinterest-alt"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-instagram"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-rss"></i></a>
-            </div>
-        </div>          
-    </div>
+
+    <!--                      -->
+    <!-- After getting inputs -->
+    <!--                      -->
+    <div id="tabs" style="display: none;">
     <section class="section">
-        <div class="container">
+        <div class="container" id="twor">
             <div class="row justify-content-around">
                 <div class="col-lg-8">
                     <div class="tabs-container">
                         <ul class="nav tab-nav" id="pills-tab">
                             <li class="item">
-                                <a class="link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"aria-selected="true">Tab 1</a>
+                                <a class="link active" id="pills-time-tab" data-toggle="pill" href="#travel-time"aria-selected="true"><strong>Time</strong></a>
                             </li>
                             <li class="item">
-                                <a class="link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"aria-selected="false">Tab 2</a>
+                                <a class="link" id="pills-weather-tab" data-toggle="pill" href="#weather-info"aria-selected="false"><strong>Weather</strong></a>
                             </li>
                             <li class="item">
-                                <a class="link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact"aria-selected="false">Tab 3</a>
+                                <a class="link" id="pills-outfit-tab" data-toggle="pill" href="#outfit-recommend"aria-selected="false"><strong>Outfit</strong></a>
+                            </li>
+                            <li class="item">
+                                <a class="link" id="pills-restaurant-tab" data-toggle="pill" href="#restaurant-recommend"aria-selected="false"><strong>Place</strong></a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="pills-home">
-                                <h4 class="title">Some Title</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam repellendus esse consectetur possimus voluptatem veniam quas ducimus ullam deleniti? Possimus, unde eveniet suscipit perspiciatis dicta numquam voluptate fuga id, optio.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit tempore molestiae excepturi commodi ullam provident, optio dicta, nulla officiis consectetur soluta et officia neque odio blanditiis aspernatur cum cumque error?</p>
-
-                                <button class="btn btn-primary mt-3">Download</button>
+                            <div class="tab-pane fade show active" id="travel-time">
+                                <h4 class="title"><strong>Travel Time</strong></h4><p><br></p>
+                                <table>
+                                <tr>
+                                    <td>
+                                    <span class="material-symbols-outlined">
+                                        pin_drop
+                                    </span>
+                                    </td>
+                                    <td>
+                                    <h6 class="txt-point" id="start-point-content">Error : You did not enter a starting point!</h6>
+                                    </td>
+                                </tr>
+                                <tr height="120">
+                                    <td>
+                                        <span class="material-symbols-outlined">
+                                            more_vert
+                                        </span>
+                                    </td>
+                                    <td>
+                                    <h6 class="txt-time" id="travel-time-content">Error : time : null</h6>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    <span class="material-symbols-outlined">
+                                        pin_drop
+                                    </span>
+                                    </td>
+                                    <td>
+                                    <h6 class="txt-point second" id="dest-point-content">Error : You did not enter a destiantion</h6>
+                                    </td>
+                                </tr>
+                                </table>
+                                    <!--<button class="btn btn-primary mt-3">Download</button>-->
                             </div>
-                            <div class="tab-pane fade" id="pills-profile">
-                                <h4 class="title">Another Title</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit unde totam nostrum, sunt accusamus in delectus aspernatur, nisi eligendi ipsum eum! Aspernatur recusandae nihil rem qui quam vero, saepe inventore tempora? Necessitatibus corporis, nam minus reiciendis rerum? Eius voluptatem facilis, vitae minima modi corrupti ullam, temporibus vel eum fugit inventore obcaecati provident ratione, ab aliquid perspiciatis commodi, autem in nemo.</p>
-                                <p><strong>Lorem ipsum dolor sit amet, consectetur adipisicing.</strong></p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit tempore molestiae excepturi commodi ullam provident, optio dicta, nulla officiis consectetur soluta et officia neque odio blanditiis aspernatur cum cumque error?</p>
+                            <div class="tab-pane fade" id="weather-info">
+                                <h4 class="title"><strong><br>Weather Information of the destination</strong></h4>
+																<div id="weathericon-container" class="">
+																	<img id="weathericon" src="" alt="" class="">
+																	<div id="weather-info-content">
+																		<p><strong>Error : You did not enter a starting point and a destination</strong></p>
+																	</div>
+																</div>
                             </div>
-                            <div class="tab-pane fade" id="pills-contact">
-                                <h4 class="title">Some Other </h4>
-                                <p>Consectetur amet architecto, temporibus, debitis impedit dolore eius. Enim alias beatae architecto iusto incidunt pariatur reprehenderit impedit ipsum ex at deserunt, inventore corrupti rerum eius obcaecati. Itaque repellendus illum aut beatae ex quasi doloremque voluptatem. Numquam at possimus, obcaecati, voluptas aut vel nam recusandae pariatur error illum quaerat sunt! Ipsam rerum enim hic atque nemo debitis, voluptate obcaecati inventore culpa. Odit adipisci eos natus fugiat. Id, deserunt qui aliquam? Provident tempora repellat, repellendus consequatur quia dolor at dolore temporibus esse in rem ea necessitatibus quo nesciunt eos a dolorum voluptates, tenetur non eius quasi! Autem provident amet, maiores tenetur, eveniet dicta, laborum odio velit sint consequatur beatae nemo at! Aperiam magnam eveniet rerum, optio consequuntur quas maiores ullam necessitatibus nesciunt.</p>
+                            <div class="tab-pane fade" id="outfit-recommend">
+                                <h4 class="title"><strong>Outfit Recommendation</strong><br><br></h4>
+                                <p id="outfit-recommend-content">Error : You did not enter a starting point and a destination</p>
+                            </div>
+                            <div class="tab-pane fade" id="restaurant-recommend">
+                                <h4 class="title"><strong>Place Recommendation</strong></h4>
+																<h6>Restaurants and Cafe near the Destination</h6>
+																<div id="place_radio">
+																	<input type="radio" name="place" value="restaurant" checked="checked"/>&ensp;<strong>Restaurant</strong>&ensp;&ensp;
+																	<input type="radio" name="place" value="cafe"/>&ensp;<strong>Cafe</strong>
+																</div>
+                                <div id="show-place-button-container">
+                                    <button type="button" id="show-place-button" class="btn btn-secondary" style="float: left" onclick="showPlaces()">show places</button>
+                                </div>
+                                <div class="container" id="map" style="width:100%;height:350px;"></div>
                             </div>
                         </div>
                     </div>
@@ -133,243 +180,40 @@
                 <div class="col-lg-4 d-none d-lg-block align-self-center">
                     <img src="assets/imgs/eiffel-tower.svg" alt="" class="w-100 tower">
                 </div>
-            </div>                  
-        </div>                      
+            </div>
+        </div>
     </section>
     <section class="section">
-        <div class="container">
+        <div class="container" id="playlist">
             <div class="row justify-content-between">
-                <div class="col-md-5 align-self-center mb-4 mb-md-0">
-                    <img src="assets/imgs/img.jpg" alt="" class="shadow w-100">
-                </div>
-                <div class="col-md-6 col-lg-5">
-                    <h6 class="title">Section with Media list</h6>
-                    <p>Consectetur adipisicing elit. Quam odit odio et neque perferendis perspiciatis magnam hic ut facilis possimus!consectetur adipisicing elit. Impedit repellat ipsam quaerat error odit commodi.</p>
-                    <ul class="list-unstyled mt-4">
-                        <li class="media">
-                            <div class="circle-40 mr-3 mt-1"><i class="ti-gift"></i></div>
-                            <div class="media-body">
-                                <h6 class="mb-2">List-based media object</h6>
-                                <p>Cras sit amet nibh libero, in gravida nulla.</p>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="circle-40 mr-3 mt-1"><i class="ti-face-smile"></i></div>
-                            <div class="media-body">
-                                <h6 class="mb-2">Another one</h6>
-                                <p>Cras in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</p>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="circle-40 mr-3 mt-1"><i class="ti-microphone"></i></div>
-                            <div class="media-body">
-                                <h6 class="mb-2">One more</h6>
-                                <p>Nulla vel metus scelerisque ante sollicitudin. Cras purus odio.</p>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="col-md-6 col-lg-5" style="margin:auto;">
+                    <h6 class="title"><strong>A Playlist for Travel</strong></h6>
+										<div class="container" id="icon-container">
+												<img src="./assets/imgs/Spotify_icon.png" id="spotify-icon" alt="spotify-icon" onclick="getPlaylist()"/>
+												<div id="playlist-content">
+													<h6 class="mb-2">Music Playlist</h6>
+													<p>This section provides a music playlist for travel time.<br>Click the icon to connect to Spotify Application.</p>
+												</div>
+										</div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="section">
-        <div class="container">
-            <div class="row justify-content-between">               
-                <div class="col-md-6 col-lg-5 align-self-center">
-                    <h6 class="title">Standard Picture Section</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio ut voluptatum ipsum. Rerum fuga cumque illo nihil nobis vero ducimus, animi voluptatum nemo facilis quae quia odit accusantium doloremque? Totam.</p>
-                    <p><strong>Adipisicing elit. Quos ad doloribus numquam cum odio dolorem!</strong></p>
-                    <p>Rerum fuga cumque consectetur adipisicing elit. Pariatur quis ipsum facere officiis magni ullam quasi fuga magnam dicta quas.</p>                    
-                </div>
-                <div class="col-md-5 mt-4 mt-md-0">
-                    <img src="assets/imgs/img1.jpg" alt="" class="shadow w-100">
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section" id="about">
-        <div class="container text-center">
-            <h6 class="display-4 has-line">WHY THIS IS AWESOME</h6>
-            <p class="mb-5 pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="circle-100 mb-3"><i class="ti-light-bulb"></i></div>
-                    <h6 class="title mb-3">Thoughtful Design</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas eveniet laborum, vero doloremque sunt tempora.</p>
-                </div>
-                <div class="col-lg-4">
-                    <div class="circle-100 mb-3"><i class="ti-paint-bucket"></i></div>
-                    <h6 class="title mb-3">WELL CRAFTED</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas eveniet laborum, vero doloremque sunt tempora.</p>
-                </div>
-                <div class="col-lg-4">
-                    <div class="circle-100 mb-3"><i class="ti-marker-alt"></i></div>
-                    <h6 class="title mb-3">EASY TO CUSTOMIZE</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas eveniet laborum, vero doloremque sunt tempora.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section" id="pricing">
-        <div class="container text-center">
-            <h6 class="display-4 has-line">PRICING OPTIONS</h6>
-            <p class="mb-5 pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <div class="row pt-5">
-                <div class="col-lg-4">
-                    <a href="javascript:void(0)" class="pricing-card">
-                        <div class="head">Basib</div>
-                        <div class="body">
-                            <h1><small>$</small>0</h1>
-                            <p>Free for Life</p>
-                        </div>
-                        <ul class="list-group">
-                            <li class="list-group-item">1 GB OF SPACE</li>
-                            <li class="list-group-item">10 GB OF BANDWIDTH</li>
-                            <li class="list-group-item">3 WEBSITES</li>
-                            <li class="list-group-item">BASIC CUSTOMIZATION</li>
-                            <li class="list-group-item">WORDPRESS INTEGRATION</li>
-                            <li class="list-group-item">EMAIL SUPPORT</li>
-                        </ul>
-                    </a>
-                </div>
-                <div class="col-lg-4">
-                    <a href="javascript:void(0)" class="pricing-card popular">
-                        <div class="head">Professional</div>
-                        <div class="body">
-                            <h1><small>$</small>14.99</h1>
-                            <p>Monthly Payment</p>
-                        </div>
-                        <div class="popular-item">OUR MOST POPULAR</div>
-                        <ul class="list-group">
-                            <li class="list-group-item">5 GB OF SPACE</li>
-                            <li class="list-group-item">50 GB OF BANDWIDTH</li>
-                            <li class="list-group-item">10 WEBSITES</li>
-                            <li class="list-group-item">ADVANCED CUSTOMIZATION</li>
-                            <li class="list-group-item">WORDPRESS INTEGRATION</li>
-                            <li class="list-group-item">EMAIL SUPPORT</li>
-                        </ul>
-                    </a>
-                </div>
-                <div class="col-lg-4">
-                    <a href="javascript:void(0)" class="pricing-card">
-                        <div class="head">Enterprise</div>
-                        <div class="body">
-                            <h1><small>$</small>99</h1>
-                            <p>Monthly Payment</p>
-                        </div>
-                        <ul class="list-group">
-                            <li class="list-group-item">UNLIMITED OF SPACE</li>
-                            <li class="list-group-item">UNLIMITED BANDWIDTH</li>
-                            <li class="list-group-item">120 WEBSITES</li>
-                            <li class="list-group-item">ADVANCED CUSTOMIZATION</li>
-                            <li class="list-group-item">WORDPRESS INTEGRATION</li>
-                            <li class="list-group-item">EMAIL SUPPORT</li>
-                        </ul>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section" id="review">
-        <div class="container text-center">
-            <h6 class="display-4 has-line">WHAT OUR CUSTOMERS ARE SAYING</h6>
-            <p class="mb-5 pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <div class="row text-left">
-                <div class="col-md-4">
-                    <div class="testmonial">                        
-                        <p class="description"><i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, eaque, repellat. Corporis facilis reprehenderit, cupiditate.</i></p>
-                        <div class="media">
-                            <img class="mr-3" src="assets/imgs/avatar1.jpg" width="60" alt="Generic placeholder image">
-                            <div class="media-body">
-                                <h6 class="title">Emma Re</h6>
-                                <p class="text-muted">Web Designer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testmonial">                        
-                        <p class="description"><i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, eaque, repellat. Corporis facilis reprehenderit, cupiditate.</i></p>
-                        <div class="media">
-                            <img class="mr-3" src="assets/imgs/avatar2.jpg" width="60" alt="Generic placeholder image">
-                            <div class="media-body">
-                                <h6 class="title">John Doe</h6>
-                                <p class="text-muted">Freelancer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testmonial">                        
-                        <p class="description"><i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, eaque, repellat. Corporis facilis reprehenderit, cupiditate.</i></p>
-                        <div class="media">
-                            <img class="mr-3" src="assets/imgs/avatar3.jpg" width="60" alt="Generic placeholder image">
-                            <div class="media-body">
-                                <h6 class="title">Emily Roe</h6>
-                                <p class="text-muted">Graphic Designer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>              
-            </div>
-        </div>
-    </section>
+
     <section class="section has-img-bg text-center">
         <div class="container">
-            <h6 class="display-3 has-line">STYLISH AXURE DESIGN</h6>
-            <h5 class="mb-5 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, itaque.</h5>
-            <button class="btn btn-outline-light btn-flat">Download</button>
+            <h6 class="display-3 has-line">Thank you for using our Service</h6>
+            <h5 class="mb-5 font-weight-light">If you want to get other results, press 'Reset' button below.</h5>
+            <button type="button" class="btn btn-outline-light btn-flat" onclick="reset()">Reset</button>
         </div>
     </section>
-    <section class="section" id="contact">
-        <div class="container text-center">
-            <h6 class="display-4 has-line">CONTACT US</h6>
-            <p class="mb-5 pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
-            <form>
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <div class="form-group pb-1">
-                            <input type="text" class="form-control" required placeholder="Name">            
-                        </div>
-                        <div class="form-group pb-1">
-                            <input type="email" class="form-control" required placeholder="Email">          
-                        </div>
-                        <div class="form-group ">
-                            <input type="text" class="form-control" placeholder="Subject">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <textarea name="" id="" cols="" rows="7" class="form-control" required placeholder="Message"></textarea>
-                    </div>
-                </div>
-                <input type="submit" class="btn btn-primary btn-block" value="Send Message">
-            </form>
-        </div>
-    </section>
-    <footer class="footer py-4 bg-dark text-light"> 
-        <div class="container text-center">
-            <p class="mb-4 small">Copyright <script>document.write(new Date().getFullYear())</script> &copy; <a href="http://www.devcrud.com">DevCRUD</a></p>
-            <div class="social-links">
-                <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-twitter-alt"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-google"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-pinterest-alt"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-instagram"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-rss"></i></a>
-            </div>
-        </div>
-    </footer>
-	
 	<!-- core  -->
     <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
     <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
     <!-- bootstrap 3 affix -->
 	<script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
-
-    <!-- Rubic js -->
-    <script src="assets/js/rubic.js"></script>
-
+    </div>
 </body>
 </html>
