@@ -28,10 +28,8 @@ function getPlaylist() {
     
     popup.onbeforeunload = function() {
         accessToken = localStorage.getItem('accessToken');
-        console.log(accessToken);
 
         let duration = parseInt(localStorage.getItem("duration"));
-        console.log(duration);
         let numtracks = parseInt(duration / 210);
 
         if (numtracks === 0)
@@ -42,7 +40,6 @@ function getPlaylist() {
 
 
         let weather = localStorage.getItem("weather");
-        console.log(weather);
         let genre = [];
         let artist = [];
         let tracks = [];
@@ -81,9 +78,6 @@ function getPlaylist() {
             "market": "KR",
             "limit": numtracks
         }
-        console.log(artist);
-        console.log(tracks);
-        console.log(genre);
 
         let songs = [];
 
@@ -113,7 +107,6 @@ function getPlaylist() {
             response.json()
         ).then((data) => {
         
-            console.log(data);
 
             data['tracks'].forEach(element => {
                 songs.push({ id: element['id'], name: element['name'], artist: element['artists'][0]['name'] }
@@ -123,8 +116,6 @@ function getPlaylist() {
             songs.forEach((song) => {
                 songstourl.push(`spotify:track:${song['id']}`);
             });
-            console.log(songstourl);
-            console.log(songs);
 
             let dest = localStorage.getItem("dest");
             // playlist 만들기
