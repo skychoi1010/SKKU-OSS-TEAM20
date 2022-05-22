@@ -142,29 +142,29 @@ function overcoat(temp_type) {
 
     switch(temp_type) { // temparature range
         case 0: // ( , 5)
-            overcoats.push('padded jacket');
-            overcoats.push('heavy coat');
-            overcoats.push('heavy quilted coat');
+            overcoats.push('a padded jacket');
+            overcoats.push(', a heavy coat');
+            overcoats.push(', or a heavy quilted coat');
             break;
         case 1: // [5, 9)
-            overcoats.push('wool coat');
-            overcoats.push('thin quilted coat');
-            overcoats.push('leather jacket');
+            overcoats.push('a wool coat');
+            overcoats.push(', a thin quilted coat');
+            overcoats.push(', or a leather jacket');
             break;
         case 2: // [9, 12)
-            overcoats.push('jumper');
-            overcoats.push('heavy cardigan');
-            overcoats.push('trench coat');
-            overcoats.push('windbreaker');
+            overcoats.push('a jumper');
+            overcoats.push(', a heavy cardigan');
+            overcoats.push(', a trench coat');
+            overcoats.push(', or a windbreaker');
             break;
         case 3: // [12, 17)
-            overcoats.push('blazer');
-            overcoats.push('blue jean jacket');
-            overcoats.push('cardigan');
-            overcoats.push('zip-up hoodie');
+            overcoats.push('a blazer');
+            overcoats.push(', a blue jean jacket');
+            overcoats.push(', a cardigan');
+            overcoats.push(', or a zip-up hoodie');
             break;
         case 4: // [17, 20)
-            overcoats.push('thin cardigan');
+            overcoats.push('a thin cardigan');
             break;
         case 5: // [20, 23)
             overcoats.push('thin sleeve shirts');
@@ -185,39 +185,39 @@ function topOutfit(temp_type) {
 
     switch(temp_type) { // temparature range
         case 0: // ( , 5)
-            tops.push('fleece-lined sweater');
-            tops.push('wool sweater');
+            tops.push('a fleece-lined sweater');
+            tops.push(' or a wool sweater');
             break;
         case 1: // [5, 9)
-            tops.push('fleece-lined sweater');
-            tops.push('wool sweater');
+            tops.push('a fleece-lined sweater');
+            tops.push(' or a wool sweater');
             break;
         case 2: // [9, 12)
-            tops.push('sweater');
-            tops.push('long sleeve shirts');
+            tops.push('a sweater');
+            tops.push(' or long sleeve shirts');
             break;
         case 3: // [12, 17)
-            tops.push('sweater');
-            tops.push('long sleeve shirts');
-            tops.push('sweatshirt');
-            tops.push('long sleeve polo shirts');
+            tops.push('a sweater');
+            tops.push(', long sleeve shirts');
+            tops.push(', a sweatshirt');
+            tops.push(', or long sleeve polo shirts');
             break;
         case 4: // [17, 20)
-            tops.push('sweatshirt');
-            tops.push('long sleeve shirts');
-            tops.push('polo shirt');
+            tops.push('a sweatshirt');
+            tops.push(', long sleeve shirts');
+            tops.push(', or a polo shirt');
             break;
         case 5: // [20, 23)
-            tops.push('blouse');
-            tops.push('long sleeve shirts');
+            tops.push('a blouse');
+            tops.push(' or long sleeve shirts');
             break;
         case 6: // [23, 28)
-            tops.push('short sleeve shirt');
-            tops.push('thin polo shirt');
+            tops.push('a short sleeve shirt');
+            tops.push(' or a thin polo shirt');
             break;
         case 7: // [28, )
-            tops.push('short sleeve shirt');
-            tops.push('sleeveless shirt');
+            tops.push('a short sleeve shirt');
+            tops.push(' or a sleeveless shirt');
             break;
     }
 
@@ -236,28 +236,28 @@ function bottomOutfit(temp_type) {
             break;
         case 2: // [9, 12)
             bottoms.push('long trousers');
-            bottoms.push('slacks');
+            bottoms.push(' or slacks');
             break;
         case 3: // [12, 17)
             bottoms.push('slacks');
-            bottoms.push('jeans');
+            bottoms.push(' or jeans');
             break;
         case 4: // [17, 20)
             bottoms.push('slacks');
-            bottoms.push('jeans');
-            bottoms.push('long skirt');
+            bottoms.push(', jeans');
+            bottoms.push(', or long skirt');
             break;
         case 5: // [20, 23)
             bottoms.push('cotton pants');
-            bottoms.push('long skirt');
+            bottoms.push(' or long skirt');
             break;
         case 6: // [23, 28)
             bottoms.push('short skirt');
-            bottoms.push('short pants');
+            bottoms.push(' or short pants');
             break;
         case 7: // [28, )
             bottoms.push('linen pants');
-            bottoms.push('short pants');
+            bottoms.push(' or short pants');
             break;
     }
 
@@ -283,24 +283,22 @@ function showOutfit() {
         recommend += "You don't need to take outer clothing.";
     }
     else {
-        recommend += "<strong>Outer Clothing</strong> : ";
+        recommmend += "<strong>";
         for (let item of coat) {
-            recommend += item + ", ";
+            recommend += item;
         }
-        recommend = recommend.slice(0, recommend.length - 2);
+        recommend += "</strong> is recommended for outerwear today.";
     }
 
-    recommend += "<br><br><br><strong>Top</strong> : ";
+    recommend += "<br><br>Also, it is recommended to wear <strong>";
     for (let item of top) {
-        recommend += item + ", ";
+        recommend += item;
     }
-    recommend = recommend.slice(0, recommend.length - 2);
-    
-    recommend += "<br><br><br><strong>Bottoms</strong> : ";
+    recommend += "</strong> for the top and <strong>";
     for (let item of bottom) {
-        recommend += item + ", ";
+        recommend += item;
     }
-    recommend = recommend.slice(0, recommend.length - 2);
+    recommend += "</strong> for the bottom.";
 
     document.getElementById("outfit-recommend-content").innerHTML = recommend;
 }
