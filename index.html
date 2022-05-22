@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="ko">
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,10 +11,21 @@
     <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
     <!-- Bootstrap + Rubic main styles -->
 	<link rel="stylesheet" href="assets/css/rubic.css">
+    <!-- google icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=409808e22e221a79684b538497ac9747&libraries=services,places"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBT2CB-qs3afjJG6fN6Jj5wQqB1hQVNdTQ&callback=showTravelTime">
+	</script>    
 
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
     <script src="results.js"></script>
+    <script src="playlist.js"></script>
+    <script src="place.js"></script>
+
     <style>
         #spotify-icon {
             width: 50px;
@@ -26,8 +37,26 @@
             overflow: hidden;
             position: relative;
         }
+        .material-symbols-outlined {
+            width: 30px;
+            height: 30px;
+
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 64
+            
+        }
         
+        .first {
+            float: left;
+        }
+        .second {
+            float: left;
+        }
     </style>
+    
     <nav id="scrollspy" class="navbar page-navbar navbar-dark navbar-expand-md fixed-top" data-spy="affix" data-offset-top="20">
         <div class="container">
             <a class="navbar-brand" href="#"><strong class="text-primary">TEAM</strong><span class="text-light">20</span></a>
@@ -44,16 +73,10 @@
                         <a class="nav-link" href="#twor">Outfit</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#twor">Place</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#playlist">Playlist</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#twor">Restaurant</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-dark shadow-none ml-md-4" href="components.html">Components</a>
                     </li>
                 </ul>
             </div>
@@ -88,22 +111,17 @@
                             </div>
                             
                         </div>
-                        <div class="head"><span class="text-primary">Spotify ID</span></div>
-                        <div class="body">
-                            <div class="form-group">
-                                <!-- Spotify ID input -->
-                                <input type="text" id="spotify-id" class="form-control" placeholder="Spotify ID" value="">
-                            </div>
-                        </div>
+                        
                         <div class="footer">
-                            <button type="button" class="btn btn-primary btn-block" onClick='showResults()'>Press Here</button>
+                            <!--<button class="btn btn-primary btn-block">Press Here!</button>-->
+                            <button id="init" type="button" class="btn btn-primary btn-block" onClick='showResults()'>Press Here!</button>
                         </div>
-                    </form> 
+                    </form>
                 </div>
-            </div>  
+            </div>
         </div>
     </header>
-    
+
     <!--                      -->
     <!-- After getting inputs -->
     <!--                      -->
@@ -124,29 +142,64 @@
                                 <a class="link" id="pills-outfit-tab" data-toggle="pill" href="#outfit-recommend"aria-selected="false"><strong>Outfit</strong></a>
                             </li>
                             <li class="item">
-                                <a class="link" id="pills-restaurant-tab" data-toggle="pill" href="#restaurant-recommend"aria-selected="false"><strong>Restaurant</strong></a>
+                                <a class="link" id="pills-restaurant-tab" data-toggle="pill" href="#restaurant-recommend"aria-selected="false"><strong>Place</strong></a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="travel-time">
-                                <h4 class="title"><strong>Travel Time</strong></h4>
-                                <p>Write contents - 1</p>
-                                <!--<button class="btn btn-primary mt-3">Download</button>-->
+                                <h4 class="title"><strong>Travel Time</strong></h4><p><br></p>
+                                <table>
+                                <tr>
+                                    <td>
+                                    <span class="material-symbols-outlined">
+                                        pin_drop
+                                    </span>
+                                    </td>
+                                    <td>   
+                                    <h6 class="txt-point" id="start-point-content">Error : You did not enter a starting point!</h6>
+                                    </td>
+                                </tr>
+                                <tr height="120">
+                                    <td>
+                                        <span class="material-symbols-outlined">
+                                            more_vert
+                                        </span>
+                                    </td>
+                                    <td>
+                                    <h6 class="txt-time" id="travel-time-content">Error : time : null</h6>
+                                    </td>
+                                </tr>
+                                <tr>  
+                                    <td>
+                                    <span class="material-symbols-outlined">
+                                        pin_drop
+                                    </span>
+                                    </td>
+                                    <td>
+                                    <h6 class="txt-point second" id="dest-point-content">Error : You did not enter a destiantion</h6>
+                                    </td>
+                                </tr> 
+                                </table>
+                                    <!--<button class="btn btn-primary mt-3">Download</button>-->
                             </div>
                             <div class="tab-pane fade" id="weather-info">
                                 <h4 class="title"><strong>Weather Information of the destination</strong></h4>
-                                <p>Write contents - 2</p>
+																<img id="weathericon" src="" alt="" class="">
+																<p id="weather-info-content">Error : You did not enter a starting point and a destination</p>
                             </div>
                             <div class="tab-pane fade" id="outfit-recommend">
-                                <h4 class="title"><strong>Outfit Recommendation</strong></h4>
-                                <p id="outfit-recommend-content">Write contents - 3</p>
+                                <h4 class="title"><strong>Outfit Recommendation</strong><br><br></h4>
+                                <p id="outfit-recommend-content">Error : You did not enter a starting point and a destination</p>
                             </div>
                             <div class="tab-pane fade" id="restaurant-recommend">
-                                <h4 class="title"><strong>Restaurant Recommendation</strong></h4>
-                                <h6>Restaurants near the Destiantion</h6>
-                                <input type="radio" name="place" value="restaurant" checked="checked"/> Restaurant<p>  </p>
-                                <input type="radio" name="place" value="cafe"/>Cafe
-                                <p>Write contents - 4</p>
+                                <h4 class="title"><strong>Place Recommendation</strong></h4>
+                                <h6>Restaurants/Cafe near the Destiantion</h6>
+                                    <input type="radio" name="place" value="restaurant" checked="checked"/> Restaurant<p>  </p>
+                                    <input type="radio" name="place" value="cafe"/> Cafe
+                                <div id="show-place-button-container">
+                                    <button type="button" id="show-place-button" class="btn btn-secondary" style="float: left" onclick="showPlaces()">show places</button>
+                                </div>
+                                <div class="container" id="map" style="width:100%;height:350px;"></div>
                             </div>
                         </div> 
                     </div>
@@ -166,16 +219,10 @@
                 <div class="col-md-6 col-lg-5">
                     <h6 class="title"><strong>A Playlist for Travel</strong></h6>
                     <ul class="list-unstyled mt-4">
-
                         <li class="media">
-                            <!--스포티파이 하이퍼링크-->
                             <div class="container" id="icon-container">
-                                <!--하이퍼링크는 일단 임시로 넣어놨습니다-->
-                                <a href="https://www.spotify.com/" target="_blank">
-                                    <img src="Spotify_icon.png" id="spotify-icon" alt="spotify-icon"/>
-                                </a>
-                            </div>
-                            
+                                <img src="Spotify_icon.png" id="spotify-icon" alt="spotify-icon" onclick="getPlaylist()"/>
+                            </button></div>
                             <div class="media-body">
                                 <h6 class="mb-2">Music Playlist</h6>
                                 <p>This section provides a music playlist for travel time. Click the icon to connect to Spotify Application.</p>
@@ -186,152 +233,8 @@
             </div>
         </div>
     </section>
-    
-    <!--
-    <section class="section">
-        <div class="container">
-            <div class="row justify-content-between">               
-                <div class="col-md-6 col-lg-5 align-self-center">
-                    <h6 class="title">Standard Picture Section</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio ut voluptatum ipsum. Rerum fuga cumque illo nihil nobis vero ducimus, animi voluptatum nemo facilis quae quia odit accusantium doloremque? Totam.</p>
-                    <p><strong>Adipisicing elit. Quos ad doloribus numquam cum odio dolorem!</strong></p>
-                    <p>Rerum fuga cumque consectetur adipisicing elit. Pariatur quis ipsum facere officiis magni ullam quasi fuga magnam dicta quas.</p>                    
-                </div>
-                <div class="col-md-5 mt-4 mt-md-0">
-                    <img src="assets/imgs/img1.jpg" alt="" class="shadow w-100">
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section" id="about">
-        <div class="container text-center">
-            <h6 class="display-4 has-line">WHY THIS IS AWESOME</h6>
-            <p class="mb-5 pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="circle-100 mb-3"><i class="ti-light-bulb"></i></div>
-                    <h6 class="title mb-3">Thoughtful Design</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas eveniet laborum, vero doloremque sunt tempora.</p>
-                </div>
-                <div class="col-lg-4">
-                    <div class="circle-100 mb-3"><i class="ti-paint-bucket"></i></div>
-                    <h6 class="title mb-3">WELL CRAFTED</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas eveniet laborum, vero doloremque sunt tempora.</p>
-                </div>
-                <div class="col-lg-4">
-                    <div class="circle-100 mb-3"><i class="ti-marker-alt"></i></div>
-                    <h6 class="title mb-3">EASY TO CUSTOMIZE</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas eveniet laborum, vero doloremque sunt tempora.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section" id="pricing">
-        <div class="container text-center">
-            <h6 class="display-4 has-line">PRICING OPTIONS</h6>
-            <p class="mb-5 pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <div class="row pt-5">
-                <div class="col-lg-4">
-                    <a href="javascript:void(0)" class="pricing-card">
-                        <div class="head">Basib</div>
-                        <div class="body">
-                            <h1><small>$</small>0</h1>
-                            <p>Free for Life</p>
-                        </div>
-                        <ul class="list-group">
-                            <li class="list-group-item">1 GB OF SPACE</li>
-                            <li class="list-group-item">10 GB OF BANDWIDTH</li>
-                            <li class="list-group-item">3 WEBSITES</li>
-                            <li class="list-group-item">BASIC CUSTOMIZATION</li>
-                            <li class="list-group-item">WORDPRESS INTEGRATION</li>
-                            <li class="list-group-item">EMAIL SUPPORT</li>
-                        </ul>
-                    </a>
-                </div>
-                <div class="col-lg-4">
-                    <a href="javascript:void(0)" class="pricing-card popular">
-                        <div class="head">Professional</div>
-                        <div class="body">
-                            <h1><small>$</small>14.99</h1>
-                            <p>Monthly Payment</p>
-                        </div>
-                        <div class="popular-item">OUR MOST POPULAR</div>
-                        <ul class="list-group">
-                            <li class="list-group-item">5 GB OF SPACE</li>
-                            <li class="list-group-item">50 GB OF BANDWIDTH</li>
-                            <li class="list-group-item">10 WEBSITES</li>
-                            <li class="list-group-item">ADVANCED CUSTOMIZATION</li>
-                            <li class="list-group-item">WORDPRESS INTEGRATION</li>
-                            <li class="list-group-item">EMAIL SUPPORT</li>
-                        </ul>
-                    </a>
-                </div>
-                <div class="col-lg-4">
-                    <a href="javascript:void(0)" class="pricing-card">
-                        <div class="head">Enterprise</div>
-                        <div class="body">
-                            <h1><small>$</small>99</h1>
-                            <p>Monthly Payment</p>
-                        </div>
-                        <ul class="list-group">
-                            <li class="list-group-item">UNLIMITED OF SPACE</li>
-                            <li class="list-group-item">UNLIMITED BANDWIDTH</li>
-                            <li class="list-group-item">120 WEBSITES</li>
-                            <li class="list-group-item">ADVANCED CUSTOMIZATION</li>
-                            <li class="list-group-item">WORDPRESS INTEGRATION</li>
-                            <li class="list-group-item">EMAIL SUPPORT</li>
-                        </ul>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section" id="review">
-        <div class="container text-center">
-            <h6 class="display-4 has-line">WHAT OUR CUSTOMERS ARE SAYING</h6>
-            <p class="mb-5 pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <div class="row text-left">
-                <div class="col-md-4">
-                    <div class="testmonial">                        
-                        <p class="description"><i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, eaque, repellat. Corporis facilis reprehenderit, cupiditate.</i></p>
-                        <div class="media">
-                            <img class="mr-3" src="assets/imgs/avatar1.jpg" width="60" alt="Generic placeholder image">
-                            <div class="media-body">
-                                <h6 class="title">Emma Re</h6>
-                                <p class="text-muted">Web Designer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testmonial">                        
-                        <p class="description"><i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, eaque, repellat. Corporis facilis reprehenderit, cupiditate.</i></p>
-                        <div class="media">
-                            <img class="mr-3" src="assets/imgs/avatar2.jpg" width="60" alt="Generic placeholder image">
-                            <div class="media-body">
-                                <h6 class="title">John Doe</h6>
-                                <p class="text-muted">Freelancer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testmonial">                        
-                        <p class="description"><i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, eaque, repellat. Corporis facilis reprehenderit, cupiditate.</i></p>
-                        <div class="media">
-                            <img class="mr-3" src="assets/imgs/avatar3.jpg" width="60" alt="Generic placeholder image">
-                            <div class="media-body">
-                                <h6 class="title">Emily Roe</h6>
-                                <p class="text-muted">Graphic Designer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>              
-            </div>
-        </div>
-    </section>
-    -->
+    
     <section class="section has-img-bg text-center">
         <div class="container">
             <h6 class="display-3 has-line">Thank you for using our Service</h6>
@@ -339,49 +242,6 @@
             <button type="button" class="btn btn-outline-light btn-flat" onclick="reset()">Reset</button>
         </div>
     </section>
-
-    <!--
-    <section class="section" id="contact">
-        <div class="container text-center">
-            <h6 class="display-4 has-line">CONTACT US</h6>
-            <p class="mb-5 pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-            <form>
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <div class="form-group pb-1">
-                            <input type="text" class="form-control" required placeholder="Name">            
-                        </div>
-                        <div class="form-group pb-1">
-                            <input type="email" class="form-control" required placeholder="Email">          
-                        </div>
-                        <div class="form-group ">
-                            <input type="text" class="form-control" placeholder="Subject">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <textarea name="" id="" cols="" rows="7" class="form-control" required placeholder="Message"></textarea>
-                    </div>
-                </div>
-                <input type="submit" class="btn btn-primary btn-block" value="Send Message">
-            </form>
-        </div>
-    </section>
-    -->
-
-    <footer class="footer py-4 bg-dark text-light"> 
-        <div class="container text-center">
-            <p class="mb-4 small">Copyright <script>document.write(new Date().getFullYear())</script> &copy; <a href="http://www.devcrud.com">DevCRUD</a></p>
-            <div class="social-links">
-                <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-twitter-alt"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-google"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-pinterest-alt"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-instagram"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-rss"></i></a>
-            </div>
-        </div>
-    </footer>
 
 	<!-- core  -->
     <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
