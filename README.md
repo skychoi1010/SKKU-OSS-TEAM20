@@ -16,7 +16,7 @@ Before going out, use our site, get our support and enjoy your appointment!
 
 ## Demo 
 
-https://user-images.githubusercontent.com/50130497/169692891-36792fc1-8203-4412-bffe-63140863bee0.gif
+![demo](https://user-images.githubusercontent.com/50130497/169693186-f248c1e0-22ea-4aba-8932-43573239ac97.gif)
 
 ## Used APIs
 
