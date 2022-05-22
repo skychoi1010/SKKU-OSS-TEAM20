@@ -44,8 +44,10 @@ Before going out, use our site, get those things and enjoy your appointment!
 ## Implementation of Main Function
 
 ### Travel time
+Google Maps API provides distance matrix to calculate the travel time from the departure point to the destination by public transportation. Google Geocoder API is used to translate text input address into geographic coordinates(longitude and latitude).
 
 ### Weather at destination
+OpenWeather API provides current weather data for over 200,000 cities around the world. Google Geocoder API is used to translate text input address into geographic coordinates(longitude and latitude) and give them as inputs. We provide weather information of user's destination.
 
 ### Outfit
 An algorithm was written in JavaScript to recommend outfits according to the temparature information obtained from 'Weather at destination' function.
