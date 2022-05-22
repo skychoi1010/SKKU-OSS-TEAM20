@@ -118,6 +118,7 @@ function getPlaylist() {
             });
 
             let dest = localStorage.getItem("dest");
+            let uri;
             // playlist 만들기
             let params = {
                 "name": 'playlistgoto'+dest,
@@ -137,6 +138,7 @@ function getPlaylist() {
                 response.json()
             ).then((data) => {
                 let playlistid = data['id'];
+                uri = data['external_urls']['spotify']
                 let params = {
                     "uris": songstourl
                 }
@@ -149,7 +151,9 @@ function getPlaylist() {
                         'Authorization': 'Bearer ' + accessToken
                     },
                     body: JSON.stringify(params)
-                })
+                }).then((response) =>
+                    window.open(uri)
+                )
             })
         }
         );
