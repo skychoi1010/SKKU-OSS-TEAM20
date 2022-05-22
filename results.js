@@ -9,13 +9,32 @@ function showResults() {
   showTravelTime();
   showOutfit();
   //showPlace();
+
+  // smooth scroll
+  $(document).ready(function(){
+  	$(".nav-link").on('click', function(event) {
+
+      	if (this.hash !== "") {
+
+  			event.preventDefault();
+
+  			var hash = this.hash;
+
+  			$('html, body').animate({
+  				scrollTop: $(hash).offset().top
+  			}, 700, function(){
+  				window.location.hash = hash;
+  			});
+        	}
+      });
+  });
 }
 
 function reset() {
   offDisplay();
   $('#starting-point').reset();
   $('#destination').reset();
-    
+
 }
 
 function reset() {
@@ -295,7 +314,7 @@ function showOutfit() {
         recommend += item + ", ";
     }
     recommend = recommend.slice(0, recommend.length - 2);
-    
+
     recommend += "<br><br><br><strong>Bottoms</strong> : ";
     for (let item of bottom) {
         recommend += item + ", ";

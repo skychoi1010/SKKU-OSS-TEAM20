@@ -4,21 +4,18 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with Rubic landing page.">
-    <meta name="author" content="Devcrud">
     <title>Assistant Service for going out | TEAM20</title>
     <!-- font icons -->
-    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
-    <!-- Bootstrap + Rubic main styles -->
+    <!-- <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css"> -->
 	<link rel="stylesheet" href="assets/css/rubic.css">
     <!-- google icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    
+
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=409808e22e221a79684b538497ac9747&libraries=services,places"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBT2CB-qs3afjJG6fN6Jj5wQqB1hQVNdTQ&callback=showTravelTime">
-	</script>    
+	</script>
 
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
@@ -26,34 +23,6 @@
     <script src="playlist.js"></script>
     <script src="place.js"></script>
 
-    <style>
-        #spotify-icon {
-            width: 50px;
-            height: 50px;
-        }
-        #icon-container {
-            width: 70px;
-            height: 70px;
-            overflow: hidden;
-            position: relative;
-        }
-        .material-symbols-outlined {
-            width: 30px;
-            height: 30px;
-
-            font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 64
-            
-        }
-        #weather-info {
-            background-color: rgb(197, 227, 189);
-            border-radius: 30px;
-        }
-    </style>
-    
     <nav id="scrollspy" class="navbar page-navbar navbar-dark navbar-expand-md fixed-top" data-spy="affix" data-offset-top="20">
         <div class="container">
             <a class="navbar-brand" href="#"><strong class="text-primary">TEAM</strong><span class="text-light">20</span></a>
@@ -76,14 +45,14 @@
                     </li>
                 </ul>
             </div>
-            
+
         </div>
     </nav>
 
     <!--              -->
     <!-- Initial Page -->
     <!--              -->
-    <header class="header d-flex justify-content-center"> 
+    <header class="header d-flex justify-content-center">
         <div class="container">
             <div class="row h-100 align-items-center">
                 <div class="col-md-7">
@@ -92,7 +61,7 @@
                         <h4 class="header-subtitle">Welcome to our website</h4>
                         <p>This page provides today's weather information, estimated travel time, music playlist, and restaurant information near the destination.</p>
                         <!--<button class="btn btn-outline-light btn-flat">Download</button>-->
-                    </div>  
+                    </div>
                 </div>
                 <div class="col-md-5 d-md-block">   <!-- delete d-none -->
                     <form class="header-form">
@@ -106,9 +75,9 @@
                                 <!-- Destination input -->
                                 <input type="text" id="destination" class="form-control" placeholder="The destination is ...">
                             </div>
-                            
+
                         </div>
-                        
+
                         <div class="footer">
                             <!--<button class="btn btn-primary btn-block">Press Here!</button>-->
                             <button id="init" type="button" class="btn btn-primary btn-block" onClick='showResults()'>Press Here!</button>
@@ -116,7 +85,7 @@
                     </form>
                 </div>
             </div>
-            
+
         </div>
     </header>
 
@@ -153,7 +122,7 @@
                                         pin_drop
                                     </span>
                                     </td>
-                                    <td>   
+                                    <td>
                                     <h6 class="txt-point" id="start-point-content">Error : You did not enter a starting point!</h6>
                                     </td>
                                 </tr>
@@ -167,7 +136,7 @@
                                     <h6 class="txt-time" id="travel-time-content">Error : time : null</h6>
                                     </td>
                                 </tr>
-                                <tr>  
+                                <tr>
                                     <td>
                                     <span class="material-symbols-outlined">
                                         pin_drop
@@ -176,7 +145,7 @@
                                     <td>
                                     <h6 class="txt-point second" id="dest-point-content">Error : You did not enter a destiantion</h6>
                                     </td>
-                                </tr> 
+                                </tr>
                                 </table>
                                     <!--<button class="btn btn-primary mt-3">Download</button>-->
                             </div>
@@ -199,14 +168,14 @@
                                 </div>
                                 <div class="container" id="map" style="width:100%;height:350px;"></div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4 d-none d-lg-block align-self-center">
                     <img src="assets/imgs/eiffel-tower.svg" alt="" class="w-100 tower">
                 </div>
-            </div>                  
-        </div>                      
+            </div>
+        </div>
     </section>
     <section class="section">
         <div class="container" id="playlist">
@@ -229,7 +198,7 @@
         </div>
     </section>
 
-    
+
     <section class="section has-img-bg text-center">
         <div class="container">
             <h6 class="display-3 has-line">Thank you for using our Service</h6>
@@ -243,10 +212,6 @@
     <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
     <!-- bootstrap 3 affix -->
 	<script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
-
-    <!-- Rubic js -->
-    <script src="assets/js/rubic.js"></script>
-
     </div>
 </body>
 </html>
