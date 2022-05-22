@@ -4,18 +4,17 @@ const place_type = {
 };
 
 function showResults() {
-    onDisplay();
-    var start = document.getElementById('starting-point').value;
-    var dest = document.getElementById('destination').value;
-    var user_id = document.getElementById('spotify-id').value;
+  onDisplay();
 
-    var place_radio = document.getElementsByName('place');
-    var place_name = place_radio[0].value;
-    if (place_radio[1].checked == true) {
-        place_name = place_radio[1].value;
-    }
+  showTravelTime();
+  showOutfit();
+  //showPlace();
+}
 
-    showOutfit();
+function reset() {
+  offDisplay();
+  $('#starting-point').reset();
+  $('#destination').reset();
     
 }
 
@@ -26,11 +25,106 @@ function reset() {
 }
 
 function onDisplay() {
-    $('#tabs').show();
+  $('#tabs').show();
 }
 
 function offDisplay() {
-    $('#tabs').hide();
+  $('#tabs').hide();
+}
+
+let geocoder;
+let lat, long;
+let duration, weather;
+let start_format, dest_format;
+
+function showTravelTime() {
+  var geocoder = new google.maps.Geocoder();
+  start = document.getElementById('starting-point').value;
+  dest = document.getElementById('destination').value;
+  localStorage.setItem('dest', dest);
+  // console.log(start + dest);
+  geocoder.geocode( {'address': start}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      start_format = results[0].formatted_address;
+    } else {
+      console.log("Geocode was not successful for the following reason: " + status);
+    }
+  });
+  geocoder.geocode( {'address': dest}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      dest_format = results[0].formatted_address;
+
+      s = results[0].geometry.location.toString();
+      lat = s.replace('(','').replace(')','').split(', ')[0];
+      long = s.replace('(','').replace(')','').split(', ')[1];
+
+      showWeather();
+    } else {
+      console.log("Geocode was not successful for the following reason: " + status);
+    }
+  });
+
+  var origin1 = start;
+  // var origin2 = new google.maps.LatLng(55.930385, -3.118425);
+  var destinationA = dest;
+  // var destinationB = new google.maps.LatLng(50.087692, 14.421150);
+
+  var service = new google.maps.DistanceMatrixService();
+  service.getDistanceMatrix(
+    {
+      origins: [origin1],
+      destinations: [destinationA],
+      travelMode: google.maps.TravelMode.TRANSIT,
+      unitSystem: google.maps.UnitSystem.METRIC,
+      avoidHighways: false,
+      avoidTolls: false,
+    }, callback);
+    function callback(response, status) {
+      // console.log(JSON.stringify(response));
+      let duration_text = response['rows'][0]['elements'][0].duration.text;
+      duration = response['rows'][0]['elements'][0].duration.value;
+      // console.log(duration);
+      printTraveltime(start_format, dest_format, duration_text);
+    }
+}
+
+function showWeather(event) {
+  var latitude = lat;
+  var longitude = long;
+
+  let apiKey = "de545a26c4e8bfd9d6fd0dd858a53a3d"
+  let weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude
+  + "&lon=" + longitude
+  + "&appid=" + apiKey;
+
+  let options = { method: 'GET' }
+  $.ajax(weatherUrl, options).then((response) => {
+    // console.log(response)
+    let icon = response.weather[0].icon;
+    let iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+    document.querySelector("#weathericon").src = iconUrl;
+    let temp_cur = (response.main.temp - 273.15).toFixed(1);
+    localStorage.setItem("temp-cur", temp_cur);
+    let temp_max = (response.main.temp_max - 273.15).toFixed(1);
+    let temp_min = (response.main.temp_min - 273.15).toFixed(1);
+    let feels_like = (response.main.feels_like - 273.15).toFixed(1);
+    let description = response.weather[0].description;
+    weather = JSON.stringify(response.main);
+    // console.log(description);
+    printWeather(dest_format, temp_cur, temp_max, temp_min, feels_like, description);
+  }).catch((error) => {
+    console.log(error)
+  });
+}
+
+function printTraveltime(start_format, dest_format, duration_text) {
+    $('#start-point-content').html('The starting point is<br><I>' + start_format + '</I>');
+    $('#dest-point-content').html('The destination is<br><I>' + dest_format + '</I>');
+    $('#travel-time-content').html('It takes about <I>' + duration_text + '</I><br><p>by using public transportation<p>');
+}
+
+function printWeather(dest_format, temp_cur, temp_max, temp_min, feels_like, description) {
+  $('#weather-info-content').html('We expect ' + description + ' at ' + dest_format + '.<br><br>The temperature will be max ' + temp_max + '&#8451; and min ' + temp_min + '&#8451;.<br>It is now ' + temp_cur + '&#8451; and it feels like ' + feels_like + '&#8451;.<br>');
 }
 
 
@@ -39,23 +133,10 @@ function offDisplay() {
  * 옷 추천 서비스
  *
 */
-function setTempType(temp) {
-    var temp_type = 0;
-    if (temp >= 28) temp_type++;
-    if (temp >= 23) temp_type++;
-    if (temp >= 20) temp_type++;
-    if (temp >= 17) temp_type++;
-    if (temp >= 12) temp_type++;
-    if (temp >= 9) temp_type++;
-    if (temp >= 5) temp_type++;
-
-    return temp_type;
-}
 
 //temp_curr : 현재 기온
-function overcoat(temp_curr) {
+function overcoat(temp_type) {
     var overcoats = [];
-    const temp_type = setTempType(temp_curr);
 
     switch(temp_type) { // temparature range
         case 0: // ( , 5)
@@ -97,9 +178,8 @@ function overcoat(temp_curr) {
     return overcoats;
 }
 
-function topOutfit(temp_curr) {
+function topOutfit(temp_type) {
     var tops = [];
-    const temp_type = setTempType(temp_curr);
 
     switch(temp_type) { // temparature range
         case 0: // ( , 5)
@@ -142,9 +222,8 @@ function topOutfit(temp_curr) {
     return tops;
 }
 
-function bottomOutfit(temp_curr) {
+function bottomOutfit(temp_type) {
     var bottoms = [];
-    const temp_type = setTempType(temp_curr);
 
     switch(temp_type) { // temparature range
         case 0: // ( , 5)
@@ -183,36 +262,43 @@ function bottomOutfit(temp_curr) {
     return bottoms;
 }
 
-const temp_curr_ = 25.0; // this is a temporary code
-
 function showOutfit() {
-    const coat = overcoat(temp_curr_);
-    const top = topOutfit(temp_curr_);
-    const bottom = bottomOutfit(temp_curr_);
+    var temp_type = 0;
+    var temp = localStorage.getItem("temp-cur");
+    if (temp >= 28) temp_type++;
+    if (temp >= 23) temp_type++;
+    if (temp >= 20) temp_type++;
+    if (temp >= 17) temp_type++;
+    if (temp >= 12) temp_type++;
+    if (temp >= 9) temp_type++;
+    if (temp >= 5) temp_type++;
+    const coat = overcoat(temp_type);
+    const top = topOutfit(temp_type);
+    const bottom = bottomOutfit(temp_type);
 
     var recommend = "";
     if (coat.length === 0) {
         recommend += "You don't need to take outer clothing.";
     }
     else {
-        recommend += "Recommended Outer Clothing : ";
+        recommend += "<strong>Outer Clothing</strong> : ";
         for (let item of coat) {
             recommend += item + ", ";
         }
-        recommend.slice(0, -2);
+        recommend = recommend.slice(0, recommend.length - 2);
     }
 
-    recommend += "<br><br>Recommend Top : ";
+    recommend += "<br><br><br><strong>Top</strong> : ";
     for (let item of top) {
         recommend += item + ", ";
     }
-    recommend.slice(0, -2);
+    recommend = recommend.slice(0, recommend.length - 2);
     
-    recommend += "<br><br>Recommend Bottoms : ";
+    recommend += "<br><br><br><strong>Bottoms</strong> : ";
     for (let item of bottom) {
         recommend += item + ", ";
     }
-    recommend.slice(0, -2);
+    recommend = recommend.slice(0, recommend.length - 2);
 
     document.getElementById("outfit-recommend-content").innerHTML = recommend;
 }
